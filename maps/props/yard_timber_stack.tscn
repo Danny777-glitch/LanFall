@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://yard_timber_stack_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/bark_brown_01_diff_1k.jpg" id="1_bark_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/bark_brown_01_nor_gl_1k.jpg" id="2_bark_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/bark_brown_01_rough_1k.jpg" id="3_bark_rough"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Bark"]
+albedo_texture = ExtResource("1_bark_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_bark_norm")
+roughness_texture = ExtResource("3_bark_rough")
+roughness = 0.9
+uv1_scale = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="Col_TimberStack"]
+size = Vector3(2.2, 1.25, 4.2)
+
+[sub_resource type="CylinderMesh" id="Mesh_Log"]
+material = SubResource("Mat_Bark")
+top_radius = 0.32
+bottom_radius = 0.32
+height = 4.2
+
+[node name="YardTimberStack" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+shape = SubResource("Col_TimberStack")
+
+[node name="Log1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.65, 0.32, 0)
+mesh = SubResource("Mesh_Log")
+
+[node name="Log2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.0, 0.32, 0)
+mesh = SubResource("Mesh_Log")
+
+[node name="Log3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.65, 0.32, 0)
+mesh = SubResource("Mesh_Log")
+
+[node name="Log4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.32, 0.88, 0)
+mesh = SubResource("Mesh_Log")
+
+[node name="Log5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.32, 0.88, 0)
+mesh = SubResource("Mesh_Log")

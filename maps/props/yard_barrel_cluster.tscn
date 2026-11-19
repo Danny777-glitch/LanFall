@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://yard_barrel_cluster_001"]
+
+[ext_resource type="PackedScene" path="res://assets/models/Barrel_01/Barrel_01.gltf" id="1_barrel"]
+
+[sub_resource type="CylinderShape3D" id="Col_Barrel1"]
+height = 1.05
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="Col_Barrel2"]
+height = 1.05
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="Col_Barrel3"]
+height = 1.05
+radius = 0.35
+
+[node name="YardBarrelCluster" type="StaticBody3D"]
+
+[node name="Col1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.525, 0.2)
+shape = SubResource("Col_Barrel1")
+
+[node name="Col2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.525, 0.2)
+shape = SubResource("Col_Barrel2")
+
+[node name="Col3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525, -0.38)
+shape = SubResource("Col_Barrel3")
+
+[node name="Barrel1" parent="." instance=ExtResource("1_barrel")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -0.35, 0, 0.2)
+
+[node name="Barrel2" parent="." instance=ExtResource("1_barrel")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.35, 0, 0.2)
+
+[node name="Barrel3" parent="." instance=ExtResource("1_barrel")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, -0.38)

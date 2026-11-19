@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://yard_perimeter_fence_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_diff_1k.jpg" id="1_iron_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_nor_gl_1k.jpg" id="2_iron_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_rough_1k.jpg" id="3_iron_rough"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_FenceSteel"]
+albedo_color = Color(0.45, 0.48, 0.52, 1)
+albedo_texture = ExtResource("1_iron_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_iron_norm")
+roughness_texture = ExtResource("3_iron_rough")
+metallic = 0.8
+roughness = 0.5
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_SteelPost"]
+albedo_color = Color(0.2, 0.22, 0.25, 1)
+metallic = 0.85
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="Col_Fence"]
+size = Vector3(6.0, 3.2, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_FencePanel"]
+material = SubResource("Mat_FenceSteel")
+size = Vector3(5.8, 3.0, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_SteelPost"]
+material = SubResource("Mat_SteelPost")
+size = Vector3(0.25, 3.4, 0.25)
+
+[node name="YardPerimeterFence" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shape = SubResource("Col_Fence")
+
+[node name="PanelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+mesh = SubResource("Mesh_FencePanel")
+
+[node name="PostL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95, 1.7, 0)
+mesh = SubResource("Mesh_SteelPost")
+
+[node name="PostR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95, 1.7, 0)
+mesh = SubResource("Mesh_SteelPost")

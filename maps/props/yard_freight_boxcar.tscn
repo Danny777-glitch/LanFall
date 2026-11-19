@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://yard_freight_boxcar_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_diff_1k.jpg" id="1_iron_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_nor_gl_1k.jpg" id="2_iron_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_rough_1k.jpg" id="3_iron_rough"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_diff_1k.jpg" id="4_wood_diff"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_BoxcarSteel"]
+albedo_color = Color(0.48, 0.24, 0.20, 1)
+albedo_texture = ExtResource("1_iron_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_iron_norm")
+roughness_texture = ExtResource("3_iron_rough")
+metallic = 0.8
+roughness = 0.55
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_BoxcarUndercarriage"]
+albedo_color = Color(0.18, 0.18, 0.20, 1)
+metallic = 0.9
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="Col_CarBody"]
+size = Vector3(2.8, 3.2, 9.6)
+
+[sub_resource type="BoxMesh" id="Mesh_CarBody"]
+material = SubResource("Mat_BoxcarSteel")
+size = Vector3(2.8, 2.7, 9.6)
+
+[sub_resource type="BoxMesh" id="Mesh_Undercarriage"]
+material = SubResource("Mat_BoxcarUndercarriage")
+size = Vector3(2.6, 0.5, 9.8)
+
+[sub_resource type="CylinderMesh" id="Mesh_Wheel"]
+material = SubResource("Mat_BoxcarUndercarriage")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.25
+
+[node name="YardFreightBoxcar" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shape = SubResource("Col_CarBody")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
+mesh = SubResource("Mesh_CarBody")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("Mesh_Undercarriage")
+
+[node name="WheelFL" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.35, 0.45, 3.2)
+mesh = SubResource("Mesh_Wheel")
+
+[node name="WheelFR" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.35, 0.45, 3.2)
+mesh = SubResource("Mesh_Wheel")
+
+[node name="WheelRL" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.35, 0.45, -3.2)
+mesh = SubResource("Mesh_Wheel")
+
+[node name="WheelRR" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.35, 0.45, -3.2)
+mesh = SubResource("Mesh_Wheel")

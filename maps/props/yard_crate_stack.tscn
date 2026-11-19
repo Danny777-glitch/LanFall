@@ -1,0 +1,26 @@
+[gd_scene load_steps=8 format=3 uid="uid://yard_crate_stack_001"]
+
+[ext_resource type="PackedScene" path="res://assets/models/wooden_military_crate/wooden_military_crate.gltf" id="1_crate"]
+[ext_resource type="PackedScene" path="res://assets/models/old_military_crate/old_military_crate.gltf" id="2_oldcrate"]
+[ext_resource type="PackedScene" path="res://assets/models/ammo_box/ammo_box.gltf" id="3_ammobox"]
+
+[sub_resource type="BoxShape3D" id="Col_Crates"]
+size = Vector3(2.4, 1.8, 1.6)
+
+[node name="YardCrateStack" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("Col_Crates")
+
+[node name="CrateBottomL" parent="." instance=ExtResource("1_crate")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.6, 0, 0)
+
+[node name="CrateBottomR" parent="." instance=ExtResource("1_crate")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.6, 0, 0)
+
+[node name="CrateTopMid" parent="." instance=ExtResource("2_oldcrate")]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0.9, 0)
+
+[node name="AmmoBoxTop" parent="." instance=ExtResource("3_ammobox")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0.6, 0.9, 0.2)

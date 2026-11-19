@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://yard_container_red_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/container_side_diff_1k.jpg" id="1_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/container_side_nor_gl_1k.jpg" id="2_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/container_side_rough_1k.jpg" id="3_rough"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Container"]
+albedo_color = Color(0.72, 0.22, 0.18, 1)
+albedo_texture = ExtResource("1_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_norm")
+roughness_texture = ExtResource("3_rough")
+metallic = 0.75
+roughness = 0.5
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="Col_Container"]
+size = Vector3(2.4, 2.6, 6.0)
+
+[sub_resource type="BoxMesh" id="Mesh_Container"]
+material = SubResource("Mat_Container")
+size = Vector3(2.4, 2.6, 6.0)
+
+[node name="YardContainer_Red" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("Col_Container")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+mesh = SubResource("Mesh_Container")
