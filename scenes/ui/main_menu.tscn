@@ -1,0 +1,188 @@
+[gd_scene load_steps=5 format=3 uid="uid://main_menu_tactical_001"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Panel"]
+bg_color = Color(0.07, 0.09, 0.14, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.85, 1, 0.75)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Input"]
+bg_color = Color(0.12, 0.15, 0.22, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.5, 0.7, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn"]
+bg_color = Color(0.14, 0.22, 0.32, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.85, 1, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.05, 0.08, 1)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -300.0
+offset_right = 240.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_Panel")
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 38
+text = "LAN FALL"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.78, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "TACTICAL LAN FPS // DISTRICT 7 - HAVEN FALL"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="NameBox" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBox/NameBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "OPERATIVE CALLSIGN"
+
+[node name="NameInput" type="LineEdit" parent="Panel/VBox/NameBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_Input")
+placeholder_text = "Enter CallSign..."
+
+[node name="SoloBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_Btn")
+text = "🎯 SOLO PRACTICE (VS BOTS)"
+
+[node name="HostBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_Btn")
+text = "🌐 HOST LAN MATCH (PORT 7777)"
+
+[node name="JoinBox" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBox/JoinBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "JOIN LAN SERVER"
+
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/JoinBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="IPInput" type="LineEdit" parent="Panel/VBox/JoinBox/HBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_Input")
+placeholder_text = "127.0.0.1"
+
+[node name="JoinBtn" type="Button" parent="Panel/VBox/JoinBox/HBox"]
+custom_minimum_size = Vector2(100, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBox_Btn")
+text = "CONNECT"
+
+[node name="LanIPLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.85, 1, 0.85)
+theme_override_font_sizes/font_size = 12
+text = "YOUR LAN IP: 127.0.0.1"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "STANDBY // READY TO DEPLOY"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Footer" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.6, 0.7, 0.85)
+theme_override_font_sizes/font_size = 11
+text = "WASD Move | 1,2,3 Guns | E Smoke | F Inspect | Esc Pause"
+horizontal_alignment = 1
+autowrap_mode = 2

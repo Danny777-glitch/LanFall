@@ -1,0 +1,209 @@
+[gd_scene load_steps=23 format=3 uid="uid://player_tactical_001"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://assets/sounds/jump.ogg" id="2_jump"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_rifle.tscn" id="3_rifle"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_pistol.tscn" id="4_pistol"]
+[ext_resource type="AudioStream" path="res://assets/sounds/blaster.ogg" id="5_shoot"]
+[ext_resource type="AudioStream" path="res://assets/sounds/reload.ogg" id="6_reload"]
+[ext_resource type="AudioStream" path="res://assets/sounds/land.ogg" id="7_land"]
+[ext_resource type="AudioStream" path="res://assets/sounds/footstep_wood_004.ogg" id="8_footstep"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_sniper.tscn" id="9_sniper"]
+[ext_resource type="PackedScene" path="res://scenes/objects/muzzle_flash.tscn" id="10_muzzle_flash"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_knife.tscn" id="11_knife"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_PlayerNavy"]
+albedo_color = Color(0.12, 0.18, 0.28, 1)
+metallic = 0.3
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="Mat_PlayerArmor"]
+albedo_color = Color(0.2, 0.22, 0.26, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="Mat_PlayerCyanVisor"]
+shading_mode = 0
+albedo_color = Color(0.15, 0.85, 1, 1)
+emission_enabled = true
+emission = Color(0.15, 0.85, 1, 1)
+emission_energy_multiplier = 3.2
+
+[sub_resource type="StandardMaterial3D" id="Mat_WeaponCharcoal"]
+albedo_color = Color(0.15, 0.16, 0.18, 1)
+metallic = 0.7
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="Mesh_Torso"]
+material = SubResource("Mat_PlayerNavy")
+size = Vector3(0.55, 0.7, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_ChestPlate"]
+material = SubResource("Mat_PlayerArmor")
+size = Vector3(0.48, 0.55, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_CoreRadianite"]
+material = SubResource("Mat_PlayerCyanVisor")
+size = Vector3(0.12, 0.12, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_Head"]
+material = SubResource("Mat_PlayerArmor")
+size = Vector3(0.32, 0.34, 0.34)
+
+[sub_resource type="BoxMesh" id="Mesh_Visor"]
+material = SubResource("Mat_PlayerCyanVisor")
+size = Vector3(0.26, 0.08, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_Limb"]
+material = SubResource("Mat_PlayerNavy")
+size = Vector3(0.18, 0.65, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_TP_Rifle"]
+material = SubResource("Mat_WeaponCharcoal")
+size = Vector3(0.08, 0.1, 0.55)
+
+[sub_resource type="BoxMesh" id="Mesh_TP_Pistol"]
+material = SubResource("Mat_WeaponCharcoal")
+size = Vector3(0.07, 0.1, 0.32)
+
+[sub_resource type="BoxMesh" id="Mesh_TP_Sniper"]
+material = SubResource("Mat_WeaponCharcoal")
+size = Vector3(0.08, 0.12, 0.75)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+outline_render_priority = 10
+text = "[OPERATIVE]
+HP: 100 / 100"
+font_size = 28
+outline_size = 6
+outline_modulate = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Visuals3D" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="Visuals3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+mesh = SubResource("Mesh_Torso")
+
+[node name="ChestPlate" type="MeshInstance3D" parent="Visuals3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08, -0.14)
+mesh = SubResource("Mesh_ChestPlate")
+
+[node name="Core" type="MeshInstance3D" parent="Visuals3D/ChestPlate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.06)
+mesh = SubResource("Mesh_CoreRadianite")
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Visuals3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58, 0)
+mesh = SubResource("Mesh_Head")
+
+[node name="Visor" type="MeshInstance3D" parent="Visuals3D/HeadMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.175)
+mesh = SubResource("Mesh_Visor")
+
+[node name="LegLeft" type="MeshInstance3D" parent="Visuals3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.42, 0)
+mesh = SubResource("Mesh_Limb")
+
+[node name="LegRight" type="MeshInstance3D" parent="Visuals3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.42, 0)
+mesh = SubResource("Mesh_Limb")
+
+[node name="TPWeapons" type="Node3D" parent="Visuals3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 1.02, -0.35)
+
+[node name="TPRifle" type="MeshInstance3D" parent="Visuals3D/TPWeapons"]
+mesh = SubResource("Mesh_TP_Rifle")
+
+[node name="MuzzlePoint" type="Marker3D" parent="Visuals3D/TPWeapons/TPRifle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
+
+[node name="MuzzleFlash" parent="Visuals3D/TPWeapons/TPRifle/MuzzlePoint" instance=ExtResource("10_muzzle_flash")]
+
+[node name="TPPistol" type="MeshInstance3D" parent="Visuals3D/TPWeapons"]
+visible = false
+mesh = SubResource("Mesh_TP_Pistol")
+
+[node name="MuzzlePoint" type="Marker3D" parent="Visuals3D/TPWeapons/TPPistol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+
+[node name="MuzzleFlash" parent="Visuals3D/TPWeapons/TPPistol/MuzzlePoint" instance=ExtResource("10_muzzle_flash")]
+
+[node name="TPSniper" type="MeshInstance3D" parent="Visuals3D/TPWeapons"]
+visible = false
+mesh = SubResource("Mesh_TP_Sniper")
+
+[node name="MuzzlePoint" type="Marker3D" parent="Visuals3D/TPWeapons/TPSniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.42)
+
+[node name="MuzzleFlash" parent="Visuals3D/TPWeapons/TPSniper/MuzzlePoint" instance=ExtResource("10_muzzle_flash")]
+
+[node name="TPKnife" parent="Visuals3D/TPWeapons" instance=ExtResource("11_knife")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.1, 0, 0)
+visible = false
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
+
+[node name="ShootRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -100)
+
+[node name="Weapons" type="Node3D" parent="Head/Camera3D"]
+
+[node name="TacticalRifle" parent="Head/Camera3D/Weapons" instance=ExtResource("3_rifle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.19, -0.42)
+
+[node name="TacticalPistol" parent="Head/Camera3D/Weapons" instance=ExtResource("4_pistol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.16, -0.36)
+visible = false
+
+[node name="TacticalSniper" parent="Head/Camera3D/Weapons" instance=ExtResource("9_sniper")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.2, -0.45)
+visible = false
+
+[node name="TacticalKnife" parent="Head/Camera3D/Weapons" instance=ExtResource("11_knife")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, -0.14, -0.3)
+visible = false
+
+[node name="MuzzleFlashLight" type="OmniLight3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.15, -0.85)
+light_color = Color(1, 0.85, 0.4, 1)
+light_energy = 0.0
+omni_range = 4.0
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jump")
+volume_db = 0.0
+
+[node name="LandSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_land")
+volume_db = 0.0
+
+[node name="FootstepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_footstep")
+volume_db = -4.0
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_shoot")
+volume_db = 0.0
+
+[node name="ReloadSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_reload")
+volume_db = 0.0

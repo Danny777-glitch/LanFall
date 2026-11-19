@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgmi_perimeter_fence_002"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_diff_1k.jpg" id="1_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_nor_gl_1k.jpg" id="2_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood_fence_lattice_albedo.png" id="3_lattice"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_FencePlanks"]
+albedo_color = Color(0.5, 0.42, 0.35, 1)
+albedo_texture = ExtResource("1_wood_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_wood_norm")
+roughness = 0.85
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_TopLattice"]
+albedo_texture = ExtResource("3_lattice")
+roughness = 0.8
+uv1_scale = Vector3(3, 1, 1)
+
+[sub_resource type="BoxShape3D" id="Col_Fence"]
+size = Vector3(8.0, 2.4, 0.35)
+
+[sub_resource type="BoxMesh" id="Mesh_LowerPlanks"]
+material = SubResource("Mat_FencePlanks")
+size = Vector3(8.0, 1.6, 0.2)
+
+[sub_resource type="BoxMesh" id="Mesh_UpperLattice"]
+material = SubResource("Mat_TopLattice")
+size = Vector3(8.0, 0.8, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_Post"]
+material = SubResource("Mat_FencePlanks")
+size = Vector3(0.3, 2.5, 0.3)
+
+[node name="BGMI_PerimeterFence" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("Col_Fence")
+
+[node name="LowerPlanks" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_LowerPlanks")
+
+[node name="UpperLattice" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("Mesh_UpperLattice")
+
+[node name="PostLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 1.25, 0)
+mesh = SubResource("Mesh_Post")
+
+[node name="PostMid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("Mesh_Post")
+
+[node name="PostRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 1.25, 0)
+mesh = SubResource("Mesh_Post")

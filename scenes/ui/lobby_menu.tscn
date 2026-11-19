@@ -1,0 +1,675 @@
+[gd_scene load_steps=18 format=3 uid="uid://lobby_bgmi_tactical_001"]
+
+[ext_resource type="Script" path="res://scenes/ui/lobby_menu.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/player/character_model.tscn" id="2_char_model"]
+[ext_resource type="Texture2D" path="res://assets/textures/cobblestone_street.png" id="3_cobble"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_Lobby"]
+sky_top_color = Color(0.18, 0.38, 0.72, 1)
+sky_horizon_color = Color(0.88, 0.68, 0.45, 1)
+sky_curve = 0.15
+ground_bottom_color = Color(0.12, 0.14, 0.18, 1)
+ground_horizon_color = Color(0.68, 0.55, 0.42, 1)
+ground_curve = 0.08
+sun_angle_max = 30.0
+
+[sub_resource type="Sky" id="Sky_Lobby"]
+sky_material = SubResource("ProceduralSkyMaterial_Lobby")
+
+[sub_resource type="Environment" id="Environment_Lobby"]
+background_mode = 2
+sky = SubResource("Sky_Lobby")
+ambient_light_source = 2
+ambient_light_color = Color(0.7, 0.68, 0.76, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 3
+tonemap_exposure = 1.05
+glow_enabled = true
+glow_bloom = 0.05
+glow_intensity = 0.45
+
+[sub_resource type="StandardMaterial3D" id="Mat_PedestalCobble"]
+albedo_texture = ExtResource("3_cobble")
+roughness = 0.75
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_RadianiteRim"]
+albedo_color = Color(0.1, 0.12, 0.16, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="StyleBoxFlat" id="Style_StartBtn"]
+bg_color = Color(1, 0.78, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.95, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(1, 0.7, 0, 0.4)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="Style_StartBtn_Hover"]
+bg_color = Color(1, 0.88, 0.25, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 0.8, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(1, 0.8, 0, 0.6)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="Style_ProfileCard"]
+bg_color = Color(0.08, 0.1, 0.15, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.8, 0.2, 0.85)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="Style_NavBtn"]
+bg_color = Color(0.1, 0.14, 0.2, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.85, 1, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_Badge"]
+bg_color = Color(0.1, 0.12, 0.16, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9, 0.75, 0.2, 0.75)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_Drawer"]
+bg_color = Color(0.06, 0.08, 0.13, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.85, 1, 0.8)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="Style_TabBtn"]
+bg_color = Color(0.12, 0.16, 0.24, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.5, 0.7, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_Modal"]
+bg_color = Color(0.07, 0.09, 0.14, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.85, 1, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="LobbyMenu" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_Lobby")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.819152, -0.40558, 0.40558, 0, 0.707107, 0.707107, -0.573576, -0.579228, 0.579228, 0, 10, 0)
+light_color = Color(1, 0.92, 0.82, 1)
+light_energy = 1.6
+shadow_enabled = true
+
+[node name="FillLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 3)
+light_color = Color(0.4, 0.8, 1, 1)
+light_energy = 1.2
+omni_range = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 1.25, 2.85)
+fov = 52.0
+
+[node name="Pedestal" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+radius = 3.2
+height = 0.2
+sides = 36
+material = SubResource("Mat_PedestalCobble")
+
+[node name="PedestalRim" type="CSGCylinder3D" parent="Pedestal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+radius = 3.25
+height = 0.04
+sides = 36
+material = SubResource("Mat_RadianiteRim")
+
+[node name="CharacterShowcase" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CharacterModel" parent="CharacterShowcase" instance=ExtResource("2_char_model")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopLeft" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 360.0
+offset_bottom = 120.0
+
+[node name="ProfileCard" type="Panel" parent="CanvasLayer/TopLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_ProfileCard")
+
+[node name="AvatarFrame" type="ColorRect" parent="CanvasLayer/TopLeft/ProfileCard"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 82.0
+offset_bottom = 82.0
+color = Color(0.15, 0.2, 0.28, 1)
+
+[node name="AvatarIcon" type="Label" parent="CanvasLayer/TopLeft/ProfileCard/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "👑"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/TopLeft/ProfileCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 94.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="NameHBox" type="HBoxContainer" parent="CanvasLayer/TopLeft/ProfileCard/VBox"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/TopLeft/ProfileCard/VBox/NameHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "SMxTHUG"
+
+[node name="EditNameBtn" type="Button" parent="CanvasLayer/TopLeft/ProfileCard/VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.3, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "✏️ EDIT CODENAME"
+flat = true
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/TopLeft/ProfileCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 0.98, 1)
+theme_override_font_sizes/font_size = 12
+text = "Lv. 35 // CONQUEROR"
+
+[node name="RegionLabel" type="Label" parent="CanvasLayer/TopLeft/ProfileCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 11
+text = "🇮🇳 INDIA | LAN 60FPS"
+
+[node name="TopRight" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -440.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 76.0
+grow_horizontal = 0
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/TopRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+theme_override_constants/separation = 12
+
+[node name="GoldBadge" type="Panel" parent="CanvasLayer/TopRight/HBox"]
+custom_minimum_size = Vector2(130, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_Badge")
+
+[node name="Label" type="Label" parent="CanvasLayer/TopRight/HBox/GoldBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "🟡 6,289"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RPBadge" type="Panel" parent="CanvasLayer/TopRight/HBox"]
+custom_minimum_size = Vector2(110, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_Badge")
+
+[node name="Label" type="Label" parent="CanvasLayer/TopRight/HBox/RPBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "🛡️ RP 35"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeasonBadge" type="Panel" parent="CanvasLayer/TopRight/HBox"]
+custom_minimum_size = Vector2(140, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_Badge")
+
+[node name="Label" type="Label" parent="CanvasLayer/TopRight/HBox/SeasonBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "C7S20 // HAVEN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomLeft" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -170.0
+offset_right = 320.0
+offset_bottom = -30.0
+grow_vertical = 0
+
+[node name="ModeCard" type="Panel" parent="CanvasLayer/BottomLeft"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("Style_ProfileCard")
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/BottomLeft/ModeCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.2, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "HAVEN FALL // DISTRICT 7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartBtn" type="Button" parent="CanvasLayer/BottomLeft"]
+layout_mode = 0
+offset_top = 54.0
+offset_right = 260.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.08, 0.08, 0.08, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("Style_StartBtn")
+theme_override_styles/hover = SubResource("Style_StartBtn_Hover")
+theme_override_styles/pressed = SubResource("Style_StartBtn")
+text = "START"
+
+[node name="RotateHint" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -106.0
+offset_right = 160.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.65, 0.72, 0.85, 0.8)
+theme_override_font_sizes/font_size = 12
+text = "🖱️ CLICK & DRAG SCREEN TO ROTATE OPERATIVE"
+horizontal_alignment = 1
+
+[node name="BottomBar" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NavHBox" type="HBoxContainer" parent="CanvasLayer/BottomBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -24.0
+offset_right = 380.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="CustomizeBtn" type="Button" parent="CanvasLayer/BottomBar/NavHBox"]
+custom_minimum_size = Vector2(200, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("Style_NavBtn")
+text = "🎽 INVENTORY / DRESS"
+
+[node name="WeaponsBtn" type="Button" parent="CanvasLayer/BottomBar/NavHBox"]
+custom_minimum_size = Vector2(170, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("Style_NavBtn")
+text = "🔫 WEAPON LOADOUT"
+
+[node name="LanBtn" type="Button" parent="CanvasLayer/BottomBar/NavHBox"]
+custom_minimum_size = Vector2(170, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("Style_NavBtn")
+text = "🌐 LAN MULTIPLAYER"
+
+[node name="SoloBtn" type="Button" parent="CanvasLayer/BottomBar/NavHBox"]
+custom_minimum_size = Vector2(160, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("Style_NavBtn")
+text = "🎯 PRACTICE RANGE"
+
+[node name="CustomizationDrawer" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -440.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_Drawer")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/CustomizationDrawer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = -18.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="CanvasLayer/CustomizationDrawer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/CustomizationDrawer/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "🎒 TACTICAL INVENTORY // CLOSET"
+
+[node name="CloseBtn" type="Button" parent="CanvasLayer/CustomizationDrawer/VBox/Header"]
+custom_minimum_size = Vector2(36, 32)
+layout_mode = 2
+text = "✕"
+
+[node name="CategoryTabBar" type="HBoxContainer" parent="CanvasLayer/CustomizationDrawer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TabSuits" type="Button" parent="CanvasLayer/CustomizationDrawer/VBox/CategoryTabBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_TabBtn")
+text = "🥋 SUITS"
+
+[node name="TabVisors" type="Button" parent="CanvasLayer/CustomizationDrawer/VBox/CategoryTabBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_TabBtn")
+text = "⚡ VISOR"
+
+[node name="TabWeapons" type="Button" parent="CanvasLayer/CustomizationDrawer/VBox/CategoryTabBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_TabBtn")
+text = "🔫 WEAPON"
+
+[node name="TabSkins" type="Button" parent="CanvasLayer/CustomizationDrawer/VBox/CategoryTabBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_TabBtn")
+text = "🎨 SKINS"
+
+[node name="Scroll" type="ScrollContainer" parent="CanvasLayer/CustomizationDrawer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsGrid" type="GridContainer" parent="CanvasLayer/CustomizationDrawer/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="LanDialog" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -180.0
+offset_right = 220.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_Modal")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/LanDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="CanvasLayer/LanDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "LAN MULTIPLAYER LOBBY"
+horizontal_alignment = 1
+
+[node name="LanIPLabel" type="Label" parent="CanvasLayer/LanDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "YOUR LAN IP: 192.168.1.X (PORT: 7777)"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/LanDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "STANDBY // READY"
+horizontal_alignment = 1
+
+[node name="JoinHBox" type="HBoxContainer" parent="CanvasLayer/LanDialog/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/LanDialog/VBox/JoinHBox"]
+layout_mode = 2
+text = "HOST IP: "
+
+[node name="IPInput" type="LineEdit" parent="CanvasLayer/LanDialog/VBox/JoinHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+
+[node name="BtnHBox" type="HBoxContainer" parent="CanvasLayer/LanDialog/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HostBtn" type="Button" parent="CanvasLayer/LanDialog/VBox/BtnHBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🛡️ HOST MATCH"
+
+[node name="JoinBtn" type="Button" parent="CanvasLayer/LanDialog/VBox/BtnHBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⚔️ JOIN IP"
+
+[node name="CloseLanBtn" type="Button" parent="CanvasLayer/LanDialog/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "CLOSE"
+
+[node name="NameDialog" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -100.0
+offset_right = 180.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_Modal")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/NameDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 18.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="CanvasLayer/NameDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "CHANGE OPERATIVE CODENAME"
+horizontal_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="CanvasLayer/NameDialog/VBox"]
+layout_mode = 2
+text = "SMxTHUG"
+
+[node name="SaveBtn" type="Button" parent="CanvasLayer/NameDialog/VBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+text = "SAVE CODENAME"
+
+[node name="CancelBtn" type="Button" parent="CanvasLayer/NameDialog/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "CANCEL"

@@ -1,0 +1,214 @@
+[gd_scene load_steps=28 format=3 uid="uid://tmetric_rifle_001"]
+
+[ext_resource type="PackedScene" path="res://scenes/objects/muzzle_flash.tscn" id="1_flash"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_CarbonChassis"]
+albedo_color = Color(0.14, 0.16, 0.19, 1)
+metallic = 0.72
+roughness = 0.28
+
+[sub_resource type="StandardMaterial3D" id="Mat_GunmetalSteel"]
+albedo_color = Color(0.18, 0.20, 0.24, 1)
+metallic = 0.95
+roughness = 0.22
+
+[sub_resource type="StandardMaterial3D" id="Mat_AccentAlloy"]
+albedo_color = Color(0.12, 0.13, 0.15, 1)
+metallic = 0.85
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="Mat_StippledPolymer"]
+albedo_color = Color(0.08, 0.09, 0.10, 1)
+metallic = 0.05
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_HoloGlass"]
+transparency = 1
+albedo_color = Color(0.04, 0.08, 0.11, 0.65)
+roughness = 0.04
+clearcoat_enabled = true
+clearcoat = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_HoloReticle"]
+shading_mode = 0
+albedo_color = Color(0.15, 0.95, 0.45, 1)
+emission_enabled = true
+emission = Color(0.15, 0.95, 0.45, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_RadianiteCore"]
+albedo_color = Color(0.14, 0.15, 0.18, 1)
+metallic = 0.85
+roughness = 0.28
+
+[sub_resource type="BoxMesh" id="Mesh_Receiver"]
+material = SubResource("Mat_CarbonChassis")
+size = Vector3(0.065, 0.082, 0.36)
+
+[sub_resource type="BoxMesh" id="Mesh_AccentTrim"]
+material = SubResource("Mat_AccentAlloy")
+size = Vector3(0.068, 0.012, 0.34)
+
+[sub_resource type="BoxMesh" id="Mesh_RailTop"]
+material = SubResource("Mat_GunmetalSteel")
+size = Vector3(0.042, 0.016, 0.46)
+
+[sub_resource type="BoxMesh" id="Mesh_Handguard"]
+material = SubResource("Mat_CarbonChassis")
+size = Vector3(0.064, 0.072, 0.26)
+
+[sub_resource type="CylinderMesh" id="Mesh_Barrel"]
+material = SubResource("Mat_GunmetalSteel")
+top_radius = 0.015
+bottom_radius = 0.018
+height = 0.38
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="Mesh_MuzzleComp"]
+material = SubResource("Mat_GunmetalSteel")
+top_radius = 0.022
+bottom_radius = 0.02
+height = 0.07
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="Mesh_Foregrip"]
+material = SubResource("Mat_StippledPolymer")
+size = Vector3(0.038, 0.09, 0.042)
+
+[sub_resource type="BoxMesh" id="Mesh_Grip"]
+material = SubResource("Mat_StippledPolymer")
+size = Vector3(0.042, 0.13, 0.055)
+
+[sub_resource type="BoxMesh" id="Mesh_TriggerGuard"]
+material = SubResource("Mat_GunmetalSteel")
+size = Vector3(0.018, 0.045, 0.07)
+
+[sub_resource type="BoxMesh" id="Mesh_Trigger"]
+material = SubResource("Mat_AccentAlloy")
+size = Vector3(0.008, 0.03, 0.012)
+
+[sub_resource type="BoxMesh" id="Mesh_Mag"]
+material = SubResource("Mat_GunmetalSteel")
+size = Vector3(0.04, 0.16, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_MagGlow"]
+material = SubResource("Mat_RadianiteCore")
+size = Vector3(0.044, 0.08, 0.016)
+
+[sub_resource type="CylinderMesh" id="Mesh_BufferTube"]
+material = SubResource("Mat_GunmetalSteel")
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.22
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="Mesh_StockBody"]
+material = SubResource("Mat_CarbonChassis")
+size = Vector3(0.045, 0.08, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_RecoilPad"]
+material = SubResource("Mat_StippledPolymer")
+size = Vector3(0.048, 0.11, 0.025)
+
+[sub_resource type="BoxMesh" id="Mesh_SightBase"]
+material = SubResource("Mat_CarbonChassis")
+size = Vector3(0.048, 0.025, 0.09)
+
+[sub_resource type="BoxMesh" id="Mesh_SightHood"]
+material = SubResource("Mat_GunmetalSteel")
+size = Vector3(0.052, 0.048, 0.08)
+
+[sub_resource type="QuadMesh" id="Mesh_SightGlass"]
+material = SubResource("Mat_HoloGlass")
+size = Vector2(0.036, 0.032)
+
+[sub_resource type="QuadMesh" id="Mesh_Reticle"]
+material = SubResource("Mat_HoloReticle")
+size = Vector2(0.014, 0.014)
+
+[node name="TacticalRifle" type="Node3D"]
+
+[node name="Receiver" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("Mesh_Receiver")
+
+[node name="Accent_Trim" type="MeshInstance3D" parent="Receiver"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0)
+mesh = SubResource("Mesh_AccentTrim")
+
+[node name="Rail_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.048, -0.08)
+mesh = SubResource("Mesh_RailTop")
+
+[node name="Handguard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.002, -0.28)
+mesh = SubResource("Mesh_Handguard")
+
+[node name="Foregrip_Handle" type="MeshInstance3D" parent="Handguard"]
+transform = Transform3D(1, 0, 0, 0, 0.985, 0.174, 0, -0.174, 0.985, 0, -0.065, -0.04)
+mesh = SubResource("Mesh_Foregrip")
+
+[node name="Barrel_Fluted" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.01, -0.48)
+mesh = SubResource("Mesh_Barrel")
+
+[node name="Muzzle_Compensator" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.01, -0.68)
+mesh = SubResource("Mesh_MuzzleComp")
+
+[node name="MuzzlePoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -0.72)
+
+[node name="MuzzleFlash" parent="MuzzlePoint" instance=ExtResource("1_flash")]
+
+[node name="Grip_Ergo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -0.09, 0.05)
+mesh = SubResource("Mesh_Grip")
+
+[node name="Trigger_Guard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.052, 0.01)
+mesh = SubResource("Mesh_TriggerGuard")
+
+[node name="Trigger" type="MeshInstance3D" parent="Trigger_Guard"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.005, 0.01)
+mesh = SubResource("Mesh_Trigger")
+
+[node name="Magazine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, -0.11, -0.12)
+mesh = SubResource("Mesh_Mag")
+
+[node name="Mag_GlowCore" type="MeshInstance3D" parent="Magazine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0.038)
+mesh = SubResource("Mesh_MagGlow")
+
+[node name="Stock_BufferTube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.012, 0.22)
+mesh = SubResource("Mesh_BufferTube")
+
+[node name="Stock_Body" type="MeshInstance3D" parent="Stock_BufferTube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, -0.02)
+mesh = SubResource("Mesh_StockBody")
+
+[node name="Stock_RecoilPad" type="MeshInstance3D" parent="Stock_BufferTube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, -0.02)
+mesh = SubResource("Mesh_RecoilPad")
+
+[node name="Sight_Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.068, -0.06)
+mesh = SubResource("Mesh_SightBase")
+
+[node name="Sight_Hood" type="MeshInstance3D" parent="Sight_Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032, 0)
+mesh = SubResource("Mesh_SightHood")
+
+[node name="Sight_GlassFront" type="MeshInstance3D" parent="Sight_Base/Sight_Hood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.035)
+mesh = SubResource("Mesh_SightGlass")
+
+[node name="Sight_GlassRear" type="MeshInstance3D" parent="Sight_Base/Sight_Hood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035)
+mesh = SubResource("Mesh_SightGlass")
+
+[node name="Reticle_Holo" type="MeshInstance3D" parent="Sight_Base/Sight_Hood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_Reticle")

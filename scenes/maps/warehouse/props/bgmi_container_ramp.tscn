@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgmi_container_ramp_003"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/container_side_diff_1k.jpg" id="1_cont_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/container_side_nor_gl_1k.jpg" id="2_cont_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/container_side_rough_1k.jpg" id="3_cont_rough"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_diff_1k.jpg" id="4_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_nor_gl_1k.jpg" id="5_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood_military_crate_albedo.png" id="6_crate_tex"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Container"]
+albedo_color = Color(0.92, 0.82, 0.58, 1)
+albedo_texture = ExtResource("1_cont_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_cont_norm")
+roughness_texture = ExtResource("3_cont_rough")
+metallic = 0.65
+roughness = 0.6
+uv1_scale = Vector3(2.5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ContainerTrims"]
+albedo_color = Color(0.25, 0.24, 0.22, 1)
+metallic = 0.85
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="Mat_RampWood"]
+albedo_color = Color(0.65, 0.56, 0.44, 1)
+albedo_texture = ExtResource("4_wood_diff")
+normal_enabled = true
+normal_texture = ExtResource("5_wood_norm")
+roughness = 0.85
+uv1_scale = Vector3(1, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_CrateRoof"]
+albedo_texture = ExtResource("6_crate_tex")
+roughness = 0.75
+
+[sub_resource type="BoxShape3D" id="Col_Container"]
+size = Vector3(6.5, 2.8, 2.6)
+
+[sub_resource type="BoxShape3D" id="Col_Ramp"]
+size = Vector3(2.0, 0.2, 6.26)
+
+[sub_resource type="BoxMesh" id="Mesh_ContainerBody"]
+material = SubResource("Mat_Container")
+size = Vector3(6.5, 2.8, 2.6)
+
+[sub_resource type="BoxMesh" id="Mesh_CornerPost"]
+material = SubResource("Mat_ContainerTrims")
+size = Vector3(0.22, 2.85, 0.22)
+
+[sub_resource type="BoxMesh" id="Mesh_RampBed"]
+material = SubResource("Mat_RampWood")
+size = Vector3(2.0, 0.2, 6.26)
+
+[sub_resource type="BoxMesh" id="Mesh_RampCleat"]
+material = SubResource("Mat_RampWood")
+size = Vector3(1.9, 0.08, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_RoofCoverCrate"]
+material = SubResource("Mat_CrateRoof")
+size = Vector3(1.4, 0.85, 1.1)
+
+[node name="BGMI_ContainerRamp" type="StaticBody3D"]
+
+[node name="ColContainer" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("Col_Container")
+
+[node name="ContainerMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+mesh = SubResource("Mesh_ContainerBody")
+
+[node name="Post1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15, 1.4, -1.2)
+mesh = SubResource("Mesh_CornerPost")
+
+[node name="Post2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 1.4, -1.2)
+mesh = SubResource("Mesh_CornerPost")
+
+[node name="Post3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15, 1.4, 1.2)
+mesh = SubResource("Mesh_CornerPost")
+
+[node name="Post4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 1.4, 1.2)
+mesh = SubResource("Mesh_CornerPost")
+
+# Boarding Ramp: Runs from z=4.1 to z=-1.5, ascends from ground y=0 to container roof y=2.8.
+[node name="ColRamp" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 1.4, 1.3)
+shape = SubResource("Col_Ramp")
+
+[node name="RampBed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 1.4, 1.3)
+mesh = SubResource("Mesh_RampBed")
+
+[node name="Cleat1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 0.5, 3.1)
+mesh = SubResource("Mesh_RampCleat")
+
+[node name="Cleat2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 0.95, 2.2)
+mesh = SubResource("Mesh_RampCleat")
+
+[node name="Cleat3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 1.4, 1.3)
+mesh = SubResource("Mesh_RampCleat")
+
+[node name="Cleat4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 1.85, 0.4)
+mesh = SubResource("Mesh_RampCleat")
+
+[node name="Cleat5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 2.3, -0.5)
+mesh = SubResource("Mesh_RampCleat")
+
+[node name="Cleat6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 2.2, 2.7, -1.4)
+mesh = SubResource("Mesh_RampCleat")
+
+# Roof Sniper Cover Crate (Resting directly on roof at y=2.8)
+[node name="RoofSniperCover" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 3.225, 0)
+mesh = SubResource("Mesh_RoofCoverCrate")

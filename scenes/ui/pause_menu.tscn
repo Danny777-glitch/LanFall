@@ -1,0 +1,127 @@
+[gd_scene load_steps=2 format=3 uid="uid://pause_menu_001"]
+
+[ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_script"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_script")
+
+[node name="Panel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="ColorRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.06, 0.09, 0.8)
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -240.0
+offset_right = 190.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "LAN FALL — SETTINGS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="SensBox" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/SensBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBox/SensBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mouse Sensitivity"
+
+[node name="SensVal" type="Label" parent="Panel/VBox/SensBox/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+text = "0.0020"
+
+[node name="SensSlider" type="HSlider" parent="Panel/VBox/SensBox"]
+layout_mode = 2
+min_value = 0.0005
+max_value = 0.006
+step = 0.0001
+value = 0.002
+
+[node name="VolBox" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/VolBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBox/VolBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master Volume"
+
+[node name="VolVal" type="Label" parent="Panel/VBox/VolBox/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 1, 1)
+text = "80%"
+
+[node name="VolSlider" type="HSlider" parent="Panel/VBox/VolBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 80.0
+
+[node name="PerfBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 15
+text = "⚡ GRAPHICS: PERFORMANCE (HIGH FPS)"
+
+[node name="ResumeBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "RESUME MATCH"
+
+[node name="RestartBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "RESTART MATCH"
+
+[node name="MenuBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "LEAVE TO MAIN MENU"
+
+[node name="QuitBtn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "QUIT TO DESKTOP"

@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://tactical_crate_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/wood_military_crate_albedo.png" id="1_albedo"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood_military_crate_normal.png" id="2_normal"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_MilitaryWood"]
+albedo_texture = ExtResource("1_albedo")
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+roughness = 0.65
+uv1_scale = Vector3(1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_BlackSteelBrackets"]
+albedo_color = Color(0.18, 0.20, 0.22, 1)
+metallic = 0.95
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="Mesh_CrateBody"]
+material = SubResource("Mat_MilitaryWood")
+size = Vector3(1.35, 0.95, 1.15)
+
+[sub_resource type="BoxMesh" id="Mesh_LidBatten"]
+material = SubResource("Mat_BlackSteelBrackets")
+size = Vector3(1.4, 0.06, 0.12)
+
+[sub_resource type="CylinderMesh" id="Mesh_SideHandle"]
+material = SubResource("Mat_BlackSteelBrackets")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.24
+radial_segments = 12
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1.35, 0.95, 1.15)
+
+[node name="TacticalCrate" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+shape = SubResource("BoxShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+mesh = SubResource("Mesh_CrateBody")
+
+[node name="LidBattenLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, -0.42)
+mesh = SubResource("Mesh_LidBatten")
+
+[node name="LidBattenRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0.42)
+mesh = SubResource("Mesh_LidBatten")
+
+[node name="HandleLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.69, 0.48, 0)
+mesh = SubResource("Mesh_SideHandle")
+
+[node name="HandleRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.69, 0.48, 0)
+mesh = SubResource("Mesh_SideHandle")

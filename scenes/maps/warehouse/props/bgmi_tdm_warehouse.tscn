@@ -1,0 +1,245 @@
+[gd_scene load_steps=18 format=3 uid="uid://bgmi_warehouse_pbr_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_diff_1k.jpg" id="1_siding_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_nor_gl_1k.jpg" id="2_siding_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_rough_1k.jpg" id="3_siding_rough"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/dirty_concrete_diff_1k.jpg" id="4_concrete_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/dirty_concrete_nor_gl_1k.jpg" id="5_concrete_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/dirty_concrete_rough_1k.jpg" id="6_concrete_rough"]
+[ext_resource type="PackedScene" path="res://assets/models/wooden_military_crate/wooden_military_crate.gltf" id="7_crate_model"]
+[ext_resource type="PackedScene" path="res://assets/models/old_military_crate/old_military_crate.gltf" id="8_oldcrate_model"]
+[ext_resource type="PackedScene" path="res://assets/models/Barrel_01/Barrel_01.gltf" id="9_barrel_model"]
+[ext_resource type="PackedScene" path="res://assets/models/hanging_industrial_lamp/hanging_industrial_lamp.gltf" id="10_lamp_model"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_WarehouseSiding"]
+albedo_texture = ExtResource("1_siding_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_siding_norm")
+roughness_texture = ExtResource("3_siding_rough")
+roughness = 0.6
+metallic = 0.7
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_Floor"]
+albedo_texture = ExtResource("4_concrete_diff")
+normal_enabled = true
+normal_texture = ExtResource("5_concrete_norm")
+roughness_texture = ExtResource("6_concrete_rough")
+roughness = 0.8
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_SteelBeams"]
+albedo_color = Color(0.2, 0.22, 0.26, 1)
+metallic = 0.85
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="Mat_MetalRoof"]
+albedo_color = Color(0.48, 0.52, 0.56, 1)
+albedo_texture = ExtResource("1_siding_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_siding_norm")
+roughness_texture = ExtResource("3_siding_rough")
+metallic = 0.75
+roughness = 0.5
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="Mesh_InteriorFloor"]
+material = SubResource("Mat_Floor")
+size = Vector3(16.2, 0.05, 28.2)
+
+[sub_resource type="BoxMesh" id="Mesh_EndWallSegment"]
+material = SubResource("Mat_WarehouseSiding")
+size = Vector3(5.5, 7.0, 0.4)
+
+[sub_resource type="BoxMesh" id="Mesh_EndWallHeader"]
+material = SubResource("Mat_WarehouseSiding")
+size = Vector3(5.2, 2.8, 0.4)
+
+[sub_resource type="BoxMesh" id="Mesh_SideWallSegment"]
+material = SubResource("Mat_WarehouseSiding")
+size = Vector3(0.4, 7.0, 12.0)
+
+[sub_resource type="BoxMesh" id="Mesh_SideWallHeader"]
+material = SubResource("Mat_WarehouseSiding")
+size = Vector3(0.4, 3.4, 4.2)
+
+[sub_resource type="BoxMesh" id="Mesh_SteelColumn"]
+material = SubResource("Mat_SteelBeams")
+size = Vector3(0.45, 7.2, 0.45)
+
+[sub_resource type="BoxMesh" id="Mesh_RoofSlope"]
+material = SubResource("Mat_MetalRoof")
+size = Vector3(9.2, 0.3, 29.0)
+
+[sub_resource type="BoxMesh" id="Mesh_RoofTrussBeam"]
+material = SubResource("Mat_SteelBeams")
+size = Vector3(16.0, 0.3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_EndWallSegment"]
+size = Vector3(5.5, 7.0, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_SideWallSegment"]
+size = Vector3(0.4, 7.0, 12.0)
+
+[node name="BGMI_TDM_Warehouse" type="StaticBody3D"]
+
+[node name="InteriorFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("Mesh_InteriorFloor")
+
+[node name="Col_SouthLeft" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 3.5, 14.0)
+shape = SubResource("BoxShape3D_EndWallSegment")
+
+[node name="Mesh_SouthLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 3.5, 14.0)
+mesh = SubResource("Mesh_EndWallSegment")
+
+[node name="Col_SouthRight" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 3.5, 14.0)
+shape = SubResource("BoxShape3D_EndWallSegment")
+
+[node name="Mesh_SouthRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 3.5, 14.0)
+mesh = SubResource("Mesh_EndWallSegment")
+
+[node name="Mesh_SouthHeader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 14.0)
+mesh = SubResource("Mesh_EndWallHeader")
+
+[node name="Col_NorthLeft" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 3.5, -14.0)
+shape = SubResource("BoxShape3D_EndWallSegment")
+
+[node name="Mesh_NorthLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 3.5, -14.0)
+mesh = SubResource("Mesh_EndWallSegment")
+
+[node name="Col_NorthRight" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 3.5, -14.0)
+shape = SubResource("BoxShape3D_EndWallSegment")
+
+[node name="Mesh_NorthRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 3.5, -14.0)
+mesh = SubResource("Mesh_EndWallSegment")
+
+[node name="Mesh_NorthHeader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, -14.0)
+mesh = SubResource("Mesh_EndWallHeader")
+
+[node name="Col_WestNorth" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 3.5, -8.0)
+shape = SubResource("BoxShape3D_SideWallSegment")
+
+[node name="Mesh_WestNorth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 3.5, -8.0)
+mesh = SubResource("Mesh_SideWallSegment")
+
+[node name="Col_WestSouth" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 3.5, 8.0)
+shape = SubResource("BoxShape3D_SideWallSegment")
+
+[node name="Mesh_WestSouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 3.5, 8.0)
+mesh = SubResource("Mesh_SideWallSegment")
+
+[node name="Mesh_WestHeader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 5.3, 0)
+mesh = SubResource("Mesh_SideWallHeader")
+
+[node name="Col_EastNorth" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 3.5, -8.0)
+shape = SubResource("BoxShape3D_SideWallSegment")
+
+[node name="Mesh_EastNorth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 3.5, -8.0)
+mesh = SubResource("Mesh_SideWallSegment")
+
+[node name="Col_EastSouth" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 3.5, 8.0)
+shape = SubResource("BoxShape3D_SideWallSegment")
+
+[node name="Mesh_EastSouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 3.5, 8.0)
+mesh = SubResource("Mesh_SideWallSegment")
+
+[node name="Mesh_EastHeader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 5.3, 0)
+mesh = SubResource("Mesh_SideWallHeader")
+
+[node name="Col_CornerSW" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 3.6, 14.1)
+mesh = SubResource("Mesh_SteelColumn")
+
+[node name="Col_CornerSE" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 3.6, 14.1)
+mesh = SubResource("Mesh_SteelColumn")
+
+[node name="Col_CornerNW" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 3.6, -14.1)
+mesh = SubResource("Mesh_SteelColumn")
+
+[node name="Col_CornerNE" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 3.6, -14.1)
+mesh = SubResource("Mesh_SteelColumn")
+
+[node name="RoofSlopeWest" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0, 1, -4.1, 7.9, 0)
+mesh = SubResource("Mesh_RoofSlope")
+
+[node name="RoofSlopeEast" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 0, 0, 1, 4.1, 7.9, 0)
+mesh = SubResource("Mesh_RoofSlope")
+
+[node name="TrussBeamMid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.8, 0)
+mesh = SubResource("Mesh_RoofTrussBeam")
+
+[node name="WarehouseLampMid" parent="." instance=ExtResource("10_lamp_model")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 6.5, 0)
+
+[node name="LightMid" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+light_color = Color(1, 0.94, 0.82, 1)
+light_energy = 2.4
+omni_range = 18.0
+shadow_enabled = true
+
+[node name="WarehouseLampNorth" parent="." instance=ExtResource("10_lamp_model")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 6.5, -8.0)
+
+[node name="LightNorth" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -8.0)
+light_color = Color(1, 0.94, 0.82, 1)
+light_energy = 2.0
+omni_range = 14.0
+
+[node name="WarehouseLampSouth" parent="." instance=ExtResource("10_lamp_model")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 6.5, 8.0)
+
+[node name="LightSouth" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 8.0)
+light_color = Color(1, 0.94, 0.82, 1)
+light_energy = 2.0
+omni_range = 14.0
+
+[node name="CrateStackL1" parent="." instance=ExtResource("7_crate_model")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -4.2, 0, -2.5)
+
+[node name="CrateStackL2" parent="." instance=ExtResource("8_oldcrate_model")]
+transform = Transform3D(1.1, 0, 0.4, 0, 1.2, 0, -0.4, 0, 1.1, -4.2, 1.1, -2.5)
+
+[node name="BarrelL1" parent="." instance=ExtResource("9_barrel_model")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -5.5, 0, -2.2)
+
+[node name="CrateStackR1" parent="." instance=ExtResource("7_crate_model")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 4.2, 0, 2.5)
+
+[node name="CrateStackR2" parent="." instance=ExtResource("8_oldcrate_model")]
+transform = Transform3D(1.1, 0, -0.3, 0, 1.2, 0, 0.3, 0, 1.1, 4.2, 1.1, 2.5)
+
+[node name="BarrelR1" parent="." instance=ExtResource("9_barrel_model")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 5.5, 0, 2.2)

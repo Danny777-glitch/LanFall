@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://tactical_knife_001"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Grip"]
+albedo_color = Color(0.12, 0.14, 0.17, 1)
+metallic = 0.2
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="Mat_BladeSteel"]
+albedo_color = Color(0.2, 0.22, 0.25, 1)
+metallic = 0.85
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="Mat_RadianiteEdge"]
+shading_mode = 0
+albedo_color = Color(0.2, 0.9, 1, 1)
+emission_enabled = true
+emission = Color(0.2, 0.9, 1, 1)
+emission_energy_multiplier = 3.5
+
+[sub_resource type="BoxMesh" id="Mesh_Handle"]
+material = SubResource("Mat_Grip")
+size = Vector3(0.035, 0.13, 0.03)
+
+[sub_resource type="BoxMesh" id="Mesh_Blade"]
+material = SubResource("Mat_BladeSteel")
+size = Vector3(0.014, 0.2, 0.042)
+
+[sub_resource type="BoxMesh" id="Mesh_Edge"]
+material = SubResource("Mat_RadianiteEdge")
+size = Vector3(0.006, 0.19, 0.01)
+
+[node name="TacticalKnife" type="Node3D"]
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0.08)
+mesh = SubResource("Mesh_Handle")
+
+[node name="Blade" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.04, -0.07)
+mesh = SubResource("Mesh_Blade")
+
+[node name="Edge" type="MeshInstance3D" parent="Blade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+mesh = SubResource("Mesh_Edge")
+
+[node name="RingGuard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.13)
+mesh = SubResource("Mesh_Edge")

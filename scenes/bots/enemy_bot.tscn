@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://enemy_bot_001"]
+
+[ext_resource type="Script" path="res://scenes/bots/enemy_bot.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/objects/muzzle_flash.tscn" id="2_flash"]
+[ext_resource type="AudioStream" path="res://assets/sounds/rifle_shot.ogg" id="3_shoot_sound"]
+[ext_resource type="AudioStream" path="res://assets/sounds/hit.ogg" id="4_hit_sound"]
+[ext_resource type="AudioStream" path="res://assets/sounds/destroy.ogg" id="5_destroy_sound"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_CrimsonArmor"]
+albedo_color = Color(0.72, 0.16, 0.16, 1)
+metallic = 0.4
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="Mat_Charcoal"]
+albedo_color = Color(0.18, 0.2, 0.24, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_Visor"]
+shading_mode = 0
+albedo_color = Color(1, 0.55, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.55, 0.1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="Mesh_Torso"]
+material = SubResource("Mat_CrimsonArmor")
+size = Vector3(0.55, 0.7, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_ChestPlate"]
+material = SubResource("Mat_Charcoal")
+size = Vector3(0.48, 0.55, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_Head"]
+material = SubResource("Mat_Charcoal")
+size = Vector3(0.32, 0.34, 0.34)
+
+[sub_resource type="BoxMesh" id="Mesh_Visor"]
+material = SubResource("Mat_Visor")
+size = Vector3(0.26, 0.08, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_Limb"]
+material = SubResource("Mat_CrimsonArmor")
+size = Vector3(0.18, 0.65, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_Gun"]
+material = SubResource("Mat_Charcoal")
+size = Vector3(0.08, 0.1, 0.55)
+
+[node name="EnemyBot" type="CharacterBody3D"]
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+outline_render_priority = 10
+text = "[BOT 1]
+HP: 100 / 100"
+font_size = 28
+outline_size = 6
+outline_modulate = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+mesh = SubResource("Mesh_Torso")
+
+[node name="ChestPlate" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08, -0.14)
+mesh = SubResource("Mesh_ChestPlate")
+
+[node name="Head" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58, 0)
+mesh = SubResource("Mesh_Head")
+
+[node name="Visor" type="MeshInstance3D" parent="Visuals/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.175)
+mesh = SubResource("Mesh_Visor")
+
+[node name="LegLeft" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.42, 0)
+mesh = SubResource("Mesh_Limb")
+
+[node name="LegRight" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.42, 0)
+mesh = SubResource("Mesh_Limb")
+
+[node name="Rifle" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 1.02, -0.35)
+mesh = SubResource("Mesh_Gun")
+
+[node name="MuzzlePoint" type="Marker3D" parent="Visuals/Rifle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
+
+[node name="MuzzleFlash" parent="Visuals/Rifle/MuzzlePoint" instance=ExtResource("2_flash")]
+
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_shoot_sound")
+volume_db = 1.0
+max_distance = 45.0
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_hit_sound")
+volume_db = 0.0
+max_distance = 35.0
+
+[node name="DestroySound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_destroy_sound")
+volume_db = 3.0
+max_distance = 50.0

@@ -1,0 +1,217 @@
+[gd_scene load_steps=18 format=3 uid="uid://bgmi_spawn_compound_003"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_diff_1k.jpg" id="1_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_nor_gl_1k.jpg" id="2_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_rough_1k.jpg" id="3_wood_rough"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_diff_1k.jpg" id="4_roof_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/corrugated_iron_02_nor_gl_1k.jpg" id="5_roof_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/bark_brown_01_diff_1k.jpg" id="6_bark_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/bark_brown_01_nor_gl_1k.jpg" id="7_bark_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/villa_facade_albedo.png" id="8_facade"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood_military_crate_albedo.png" id="9_crate_tex"]
+[ext_resource type="PackedScene" path="res://assets/models/wooden_table_02/wooden_table_02.gltf" id="10_table"]
+[ext_resource type="PackedScene" path="res://assets/models/ammo_box/ammo_box.gltf" id="11_ammo"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_rifle.tscn" id="12_rifle"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_sniper.tscn" id="13_sniper"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_DarkWoodPlanks"]
+albedo_color = Color(0.48, 0.40, 0.32, 1)
+albedo_texture = ExtResource("1_wood_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_wood_norm")
+roughness_texture = ExtResource("3_wood_rough")
+roughness = 0.85
+uv1_scale = Vector3(2, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_TimberPosts"]
+albedo_color = Color(0.38, 0.30, 0.24, 1)
+albedo_texture = ExtResource("1_wood_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_wood_norm")
+roughness_texture = ExtResource("3_wood_rough")
+roughness = 0.8
+uv1_scale = Vector3(0.5, 3, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Mat_CompoundRoof"]
+albedo_color = Color(0.32, 0.36, 0.42, 1)
+albedo_texture = ExtResource("4_roof_diff")
+normal_enabled = true
+normal_texture = ExtResource("5_roof_norm")
+metallic = 0.65
+roughness = 0.55
+uv1_scale = Vector3(4, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Firewood"]
+albedo_texture = ExtResource("6_bark_diff")
+normal_enabled = true
+normal_texture = ExtResource("7_bark_norm")
+roughness = 0.9
+uv1_scale = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_BlueTarp"]
+albedo_color = Color(0.18, 0.28, 0.42, 1)
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="Mat_HouseWall"]
+albedo_texture = ExtResource("8_facade")
+roughness = 0.8
+uv1_scale = Vector3(2, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Crate"]
+albedo_texture = ExtResource("9_crate_tex")
+roughness = 0.75
+
+[sub_resource type="BoxShape3D" id="Col_Floor"]
+size = Vector3(22.0, 0.3, 7.5)
+
+[sub_resource type="BoxShape3D" id="Col_BackWall"]
+size = Vector3(22.0, 4.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="Col_SideWall"]
+size = Vector3(0.5, 4.5, 7.5)
+
+[sub_resource type="BoxMesh" id="Mesh_FloorDeck"]
+material = SubResource("Mat_DarkWoodPlanks")
+size = Vector3(22.0, 0.3, 7.5)
+
+[sub_resource type="BoxMesh" id="Mesh_BackWall"]
+material = SubResource("Mat_DarkWoodPlanks")
+size = Vector3(22.0, 4.5, 0.5)
+
+[sub_resource type="BoxMesh" id="Mesh_SideWall"]
+material = SubResource("Mat_DarkWoodPlanks")
+size = Vector3(0.5, 4.5, 7.5)
+
+[sub_resource type="BoxMesh" id="Mesh_HeavyPost"]
+material = SubResource("Mat_TimberPosts")
+size = Vector3(0.48, 4.6, 0.48)
+
+[sub_resource type="BoxMesh" id="Mesh_RoofSlab"]
+material = SubResource("Mat_CompoundRoof")
+size = Vector3(23.2, 0.35, 8.8)
+
+[sub_resource type="BoxMesh" id="Mesh_FasciaBeam"]
+material = SubResource("Mat_TimberPosts")
+size = Vector3(23.4, 0.4, 0.4)
+
+[sub_resource type="BoxMesh" id="Mesh_HouseBackdrop"]
+material = SubResource("Mat_HouseWall")
+size = Vector3(24.0, 8.0, 4.0)
+
+[sub_resource type="CylinderMesh" id="Mesh_FirewoodLog"]
+material = SubResource("Mat_Firewood")
+top_radius = 0.18
+bottom_radius = 0.18
+height = 2.4
+radial_segments = 10
+
+[sub_resource type="BoxMesh" id="Mesh_TarpCoveredCrates"]
+material = SubResource("Mat_BlueTarp")
+size = Vector3(3.2, 1.8, 2.2)
+
+[node name="BGMI_SpawnCompound" type="StaticBody3D"]
+
+[node name="ColFloor" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("Col_Floor")
+
+[node name="FloorDeck" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("Mesh_FloorDeck")
+
+[node name="ColBack" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 3.5)
+shape = SubResource("Col_BackWall")
+
+[node name="BackWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 3.5)
+mesh = SubResource("Mesh_BackWall")
+
+[node name="HouseBackdrop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0, 5.8)
+mesh = SubResource("Mesh_HouseBackdrop")
+
+[node name="ColSideL" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 2.25, 0)
+shape = SubResource("Col_SideWall")
+
+[node name="SideWallL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 2.25, 0)
+mesh = SubResource("Mesh_SideWall")
+
+[node name="ColSideR" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 2.25, 0)
+shape = SubResource("Col_SideWall")
+
+[node name="SideWallR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 2.25, 0)
+mesh = SubResource("Mesh_SideWall")
+
+# Front Timber Posts with wide unobstructed 6m center view
+[node name="Post1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 2.3, -3.4)
+mesh = SubResource("Mesh_HeavyPost")
+
+[node name="Post2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 2.3, -3.4)
+mesh = SubResource("Mesh_HeavyPost")
+
+[node name="Post3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 2.3, -3.4)
+mesh = SubResource("Mesh_HeavyPost")
+
+[node name="Post4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 2.3, -3.4)
+mesh = SubResource("Mesh_HeavyPost")
+
+# Overhead Heavy Corrugated Slate Pitch Roof
+[node name="RoofMain" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 4.8, 0.2)
+mesh = SubResource("Mesh_RoofSlab")
+
+[node name="FasciaBeamFront" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, -3.6)
+mesh = SubResource("Mesh_FasciaBeam")
+
+# Left & Right Weapon Tables
+[node name="TableLeft" parent="." instance=ExtResource("10_table")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.5, 0.3, 1.2)
+
+[node name="AmmoLeft1" parent="." instance=ExtResource("11_ammo")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -7.2, 1.45, 1.1)
+
+[node name="AmmoLeft2" parent="." instance=ExtResource("11_ammo")]
+transform = Transform3D(1.1, 0, 0.4, 0, 1.2, 0, -0.4, 0, 1.1, -6.0, 1.45, 1.1)
+
+[node name="RifleLeft" parent="." instance=ExtResource("12_rifle")]
+transform = Transform3D(0.9, 0, 0, 0, 0, -0.9, 0, 0.9, 0, -6.6, 1.48, 1.2)
+
+[node name="TableRight" parent="." instance=ExtResource("10_table")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6.5, 0.3, 1.2)
+
+[node name="AmmoRight1" parent="." instance=ExtResource("11_ammo")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6.0, 1.45, 1.1)
+
+[node name="AmmoRight2" parent="." instance=ExtResource("11_ammo")]
+transform = Transform3D(1.1, 0, -0.4, 0, 1.2, 0, 0.4, 0, 1.1, 7.2, 1.45, 1.1)
+
+[node name="SniperRight" parent="." instance=ExtResource("13_sniper")]
+transform = Transform3D(0.9, 0, 0, 0, 0, -0.9, 0, 0.9, 0, 6.6, 1.48, 1.2)
+
+# Firewood logs stack on the left
+[node name="FirewoodLog1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.0, 0.45, 1.5)
+mesh = SubResource("Mesh_FirewoodLog")
+
+[node name="FirewoodLog2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.0, 0.45, 1.9)
+mesh = SubResource("Mesh_FirewoodLog")
+
+[node name="FirewoodLog3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.0, 0.8, 1.7)
+mesh = SubResource("Mesh_FirewoodLog")
+
+# Blue tarp covered cargo pile on the right
+[node name="TarpCrates" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.0, 1.1, 1.5)
+mesh = SubResource("Mesh_TarpCoveredCrates")

@@ -1,0 +1,131 @@
+[gd_scene load_steps=21 format=3 uid="uid://char_model_custom_001"]
+
+[ext_resource type="Script" path="res://scenes/player/character_model.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_rifle.tscn" id="2_rifle"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_pistol.tscn" id="3_pistol"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_sniper.tscn" id="4_sniper"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/tactical_knife.tscn" id="5_knife"]
+
+[sub_resource type="BoxMesh" id="Mesh_Torso"]
+size = Vector3(0.55, 0.7, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_ChestPlate"]
+size = Vector3(0.48, 0.55, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_Core"]
+size = Vector3(0.12, 0.12, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_Head"]
+size = Vector3(0.32, 0.34, 0.34)
+
+[sub_resource type="BoxMesh" id="Mesh_Visor"]
+size = Vector3(0.26, 0.08, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_Shoulder"]
+size = Vector3(0.18, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="Mesh_UpperArm"]
+size = Vector3(0.13, 0.3, 0.13)
+
+[sub_resource type="BoxMesh" id="Mesh_Forearm"]
+size = Vector3(0.11, 0.28, 0.11)
+
+[sub_resource type="BoxMesh" id="Mesh_Hand"]
+size = Vector3(0.1, 0.1, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_Leg"]
+size = Vector3(0.18, 0.65, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_Boot"]
+size = Vector3(0.2, 0.18, 0.26)
+
+[node name="CharacterModel" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Rig" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+mesh = SubResource("Mesh_Torso")
+
+[node name="ChestPlate" type="MeshInstance3D" parent="Rig/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.14)
+mesh = SubResource("Mesh_ChestPlate")
+
+[node name="Core" type="MeshInstance3D" parent="Rig/Torso/ChestPlate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.06)
+mesh = SubResource("Mesh_Core")
+
+[node name="Head" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58, 0)
+mesh = SubResource("Mesh_Head")
+
+[node name="Visor" type="MeshInstance3D" parent="Rig/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.175)
+mesh = SubResource("Mesh_Visor")
+
+[node name="ShoulderL" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34, 1.28, 0)
+mesh = SubResource("Mesh_Shoulder")
+
+[node name="UpperArmL" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(0.866025, 0.353553, 0.353553, -0.433013, 0.883883, 0.176777, -0.25, -0.306186, 0.918559, -0.26, 1.14, -0.1)
+mesh = SubResource("Mesh_UpperArm")
+
+[node name="ForearmL" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(0.5, 0.707107, -0.5, -0.353553, 0.707107, 0.612372, 0.790569, -0.02, 0.605, -0.12, 1.02, -0.28)
+mesh = SubResource("Mesh_Forearm")
+
+[node name="HandL" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, -0.04, 1.02, -0.35)
+mesh = SubResource("Mesh_Hand")
+
+[node name="ShoulderR" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34, 1.28, 0)
+mesh = SubResource("Mesh_Shoulder")
+
+[node name="UpperArmR" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(0.906308, -0.296198, 0.296198, 0.34202, 0.925417, -0.162793, -0.246202, 0.235702, 0.939693, 0.28, 1.15, -0.06)
+mesh = SubResource("Mesh_UpperArm")
+
+[node name="ForearmR" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(0.819152, -0.422618, -0.389418, 0.542788, 0.793353, 0.276382, 0.191834, -0.437798, 0.878512, 0.18, 1.01, -0.2)
+mesh = SubResource("Mesh_Forearm")
+
+[node name="HandR" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 0.12, 0.99, -0.24)
+mesh = SubResource("Mesh_Hand")
+
+[node name="LegL" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.42, 0)
+mesh = SubResource("Mesh_Leg")
+
+[node name="BootL" type="MeshInstance3D" parent="Rig/LegL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32, -0.04)
+mesh = SubResource("Mesh_Boot")
+
+[node name="LegR" type="MeshInstance3D" parent="Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.42, 0)
+mesh = SubResource("Mesh_Leg")
+
+[node name="BootR" type="MeshInstance3D" parent="Rig/LegR"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32, -0.04)
+mesh = SubResource("Mesh_Boot")
+
+[node name="WeaponMount" type="Node3D" parent="Rig"]
+transform = Transform3D(0.877583, -0.0934148, -0.469502, 0.134591, 0.988118, 0.0768461, 0.460144, -0.122822, 0.879006, 0.06, 1.04, -0.28)
+
+[node name="Rifle" parent="Rig/WeaponMount" instance=ExtResource("2_rifle")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+
+[node name="Pistol" parent="Rig/WeaponMount" instance=ExtResource("3_pistol")]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0.04, -0.05, 0.06)
+visible = false
+
+[node name="Sniper" parent="Rig/WeaponMount" instance=ExtResource("4_sniper")]
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, -0.02, 0.02, 0.05)
+visible = false
+
+[node name="Knife" parent="Rig/WeaponMount" instance=ExtResource("5_knife")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.06, -0.02, 0.08)
+visible = false

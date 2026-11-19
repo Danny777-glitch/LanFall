@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgmi_pergola_pbr_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_diff_1k.jpg" id="1_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_nor_gl_1k.jpg" id="2_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_rough_1k.jpg" id="3_wood_rough"]
+[ext_resource type="PackedScene" path="res://assets/models/wooden_military_crate/wooden_military_crate.gltf" id="4_crate_seat"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_PergolaTimber"]
+albedo_texture = ExtResource("1_wood_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_wood_norm")
+roughness_texture = ExtResource("3_wood_rough")
+roughness = 0.82
+uv1_scale = Vector3(1, 3, 1)
+
+[sub_resource type="BoxShape3D" id="Col_PergolaPost"]
+size = Vector3(0.4, 3.8, 0.4)
+
+[sub_resource type="BoxMesh" id="Mesh_Pillar"]
+material = SubResource("Mat_PergolaTimber")
+size = Vector3(0.4, 3.8, 0.4)
+
+[sub_resource type="BoxMesh" id="Mesh_BeamMain"]
+material = SubResource("Mat_PergolaTimber")
+size = Vector3(6.5, 0.35, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_Rafter"]
+material = SubResource("Mat_PergolaTimber")
+size = Vector3(0.18, 0.25, 5.6)
+
+[node name="BGMI_WoodenPergola" type="StaticBody3D"]
+
+[node name="ColP1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1.9, -2.2)
+shape = SubResource("Col_PergolaPost")
+
+[node name="MeshP1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1.9, -2.2)
+mesh = SubResource("Mesh_Pillar")
+
+[node name="ColP2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.9, -2.2)
+shape = SubResource("Col_PergolaPost")
+
+[node name="MeshP2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.9, -2.2)
+mesh = SubResource("Mesh_Pillar")
+
+[node name="ColP3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1.9, 2.2)
+shape = SubResource("Col_PergolaPost")
+
+[node name="MeshP3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1.9, 2.2)
+mesh = SubResource("Mesh_Pillar")
+
+[node name="ColP4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.9, 2.2)
+shape = SubResource("Col_PergolaPost")
+
+[node name="MeshP4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.9, 2.2)
+mesh = SubResource("Mesh_Pillar")
+
+[node name="BeamNorth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, -2.2)
+mesh = SubResource("Mesh_BeamMain")
+
+[node name="BeamSouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, 2.2)
+mesh = SubResource("Mesh_BeamMain")
+
+[node name="Rafter1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4.05, 0)
+mesh = SubResource("Mesh_Rafter")
+
+[node name="Rafter2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 4.05, 0)
+mesh = SubResource("Mesh_Rafter")
+
+[node name="Rafter3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.05, 0)
+mesh = SubResource("Mesh_Rafter")
+
+[node name="Rafter4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 4.05, 0)
+mesh = SubResource("Mesh_Rafter")
+
+[node name="Rafter5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 4.05, 0)
+mesh = SubResource("Mesh_Rafter")
+
+[node name="BenchCrate" parent="." instance=ExtResource("4_crate_seat")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)

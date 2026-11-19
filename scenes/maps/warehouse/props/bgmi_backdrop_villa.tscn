@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgmi_backdrop_villa_pbr_001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/villa_facade_albedo.png" id="1_facade"]
+[ext_resource type="Texture2D" path="res://assets/textures/villa_facade_normal.png" id="2_facade_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/clay_roof_tiles_02_diff_1k.jpg" id="3_roof_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/clay_roof_tiles_02_nor_gl_1k.jpg" id="4_roof_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/clay_roof_tiles_02_rough_1k.jpg" id="5_roof_rough"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_VillaWalls"]
+albedo_texture = ExtResource("1_facade")
+normal_enabled = true
+normal_texture = ExtResource("2_facade_norm")
+roughness = 0.75
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_VillaRoof"]
+albedo_texture = ExtResource("3_roof_diff")
+normal_enabled = true
+normal_texture = ExtResource("4_roof_norm")
+roughness_texture = ExtResource("5_roof_rough")
+roughness = 0.7
+uv1_scale = Vector3(4, 3, 1)
+
+[sub_resource type="BoxShape3D" id="Col_Villa"]
+size = Vector3(18.0, 9.0, 12.0)
+
+[sub_resource type="BoxMesh" id="Mesh_VillaBody"]
+material = SubResource("Mat_VillaWalls")
+size = Vector3(18.0, 6.0, 12.0)
+
+[sub_resource type="BoxMesh" id="Mesh_RoofLeft"]
+material = SubResource("Mat_VillaRoof")
+size = Vector3(19.0, 0.35, 7.5)
+
+[node name="BGMI_BackdropVilla" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+shape = SubResource("Col_Villa")
+
+[node name="MainBuilding" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0, 0)
+mesh = SubResource("Mesh_VillaBody")
+
+[node name="RoofSlopeSouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 7.8, 3.0)
+mesh = SubResource("Mesh_RoofLeft")
+
+[node name="RoofSlopeNorth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 7.8, -3.0)
+mesh = SubResource("Mesh_RoofLeft")
