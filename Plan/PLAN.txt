@@ -1,0 +1,84 @@
+================================================================================
+LAN FALL - MAIN GAME PRODUCTION ROADMAP & ARCHITECTURE
+================================================================================
+
+VISION:
+A high-energy, tactical LAN multiplayer FPS with a vibrant, stylized Valorant/Overwatch
+aesthetic, designed for competitive play on local networks and optimized to run at
+butter-smooth 60 to 100+ FPS on budget everyday laptops (Intel Core i3 11th/12th Gen
+with Intel UHD / Iris Xe graphics).
+
+================================================================================
+1. CORE PILLARS & ARCHITECTURAL FOUNDATIONS
+================================================================================
+PILLAR 1: AAA-FEEL TACTICAL WEAPON ARSENAL & MELEE BLADE
+- Slot 1: VANGUARD AR — rapid 30-round automatic assault rifle with glowing holo-sight.
+- Slot 2: PHANTOM PISTOL — 3-dot green tritium sights, high single-shot accuracy.
+- Slot 3: OPERATOR SNIPER — 95 DMG heavy bolt-action with 22 FOV scope HUD overlay.
+- Slot 4: TACTICAL BLADE [NEW GIFT FEATURE] — Serrated tactical knife with glowing Radianite edge:
+  * Fast horizontal slash (Left-Click, 55 DMG).
+  * Heavy tactical thrust (Right-Click, 100 DMG critical elimination).
+  * +20% sprint/movement speed boost while holding knife (Valorant fast rotate mechanic).
+  * 360-degree spinning knife flip inspect animation [F].
+  * Quick melee access via [4] or [V].
+- Visual FX: Fiery muzzle flashes, 120m/s high-speed tracers, 3D floating damage numbers.
+- Tactical Smoke Ability [E]: 100% volumetric soft billowing cloud dome with expanding
+  Radianite ground shockwave ring and player vision blind vignette inside.
+
+PILLAR 2: EXPANSIVE MULTI-BUILDING URBAN ARENA ("DISTRICT 7 - HAVEN FALL")
+- Large 150m x 150m tactical map designed around three competitive lanes:
+  * Lane 1 (Site A - Radianite Core): Multi-level defense hub with 3-story A-Tower.
+  * Lane 2 (Mid Market / Choke Avenue): Cobblestone streets, archways, and market apartments.
+  * Lane 3 (Site B - Industrial Warehouse): High-ceiling warehouse with catwalks.
+- Strategic line-of-sight design with realistic choke points, callouts, and flank routes.
+- Stylized PBR textures: Cobblestone, slate brick, Tuscan ochre plaster, Radianite panels.
+
+PILLAR 3: LAN MULTIPLAYER & PERFORMANCE ARCHITECTURE
+- NetworkManager Autoload (ENetMultiplayerPeer):
+  * Zero-setup LAN Host (Port 7777) & Join via IP (127.0.0.1 or Local Wi-Fi/Ethernet).
+  * Auto-detection of Host's Local LAN IP for fast party invites.
+- Client-Side Prediction & Network Synchronization:
+  * 30Hz reliable transform interpolation for ultra-smooth operative movement.
+  * Networked RPC combat: bullets, tracers, hitmarkers, smoke grenades, health, and kill feed.
+  * Full 3D Operative character model with third-person weapon attachments for remote peers.
+- Tactical Scoreboard [Tab] & Settings Menu [Esc]:
+  * Dynamic scoreboard showing operatives, ping, kills, deaths.
+  * Full in-game sensitivity and volume controls.
+- Optimized for Intel i3 / Budget GPUs: GL Compatibility renderer, zero expensive post-fx lag.
+
+================================================================================
+2. IMPLEMENTATION STATUS
+================================================================================
+[COMPLETED]
+- Character controller with sprint, jump, rhythmic footsteps, landing physics.
+- 100% native .ogg low-latency audio engine (gunshots, reload, hits, explosions).
+- Jolt Physics 3D integration with high-precision collision detection.
+- Complete 4-Weapon Arsenal: Vanguard AR, Phantom Pistol, Operator Sniper, and Tactical Blade.
+- Tactical Knife Melee Combat & 360-degree twirling knife trick [F].
+- Ground-snapped Volumetric Smoke Cloud with glowing Radianite floor ring & vision blind.
+- District 7 "Haven Fall" 150m x 150m urban map with custom stylized PBR textures.
+- Enemy AI Bots (VIPER Site A, OMEN Mid, CYPHER Site B) with combat strafe & burst-fire.
+- Pause & Settings Menu [Esc] with sensitivity & volume sliders.
+- Main Menu tactical lobby with Solo Practice, Host LAN, and Join LAN buttons.
+- Full ENet LAN Multiplayer system with remote 3D player visuals and network sync.
+- In-game Scoreboard [Tab] & Kill Feed.
+- Complete Map Enrichment & Stair Traversal Bug Fixes:
+  * Full two-way smooth rooftop traversal for A-Tower, B-Warehouse, and Mid Market.
+  * Side-by-side stairwell runs and generous hatch cutouts eliminating all roof collision blocks.
+  * CharacterBody3D slope physics tuned (floor_snap_length = 0.35, floor_max_angle = 50 deg).
+  * Market Stalls in Mid Avenue with striped canopies (market_awning_stripe.png) and wooden crates.
+  * Glowing tactical site callout stencils ([ A ] and [ B ]) on archways and building walls.
+  * Site A Radianite Reactor Core (octagonal base, hazard ring, glowing cyan pillar, 15m light).
+  * Site B Courtyard Heavy Energy Hub (industrial generator, hazard stripes, amber glowing core).
+  * Suspended overhead urban power cables crossing from rooftops across Mid street.
+- AAA Graphics & High-Rise Building Asset Overhaul (RTX 4060 Forward+):
+  * Downloaded & imported comprehensive 3D Commercial City Kit, Modular Towers Kit, Road Infrastructure Kit, and Vehicle Fleet.
+  * 32 High-Rise Perimeter Skyscraper & Mega-Tower models (heights up to 110m) surrounding District 7 in a full 360-degree urban skyline.
+  * In-map detailed architectural buildings lining Mid Avenue, Site A Research complex, and Site B Industrial Depot.
+  * Rooftop industrial details added: 3D chillers, ventilation banks, and AC compressors on A-Tower, B-Warehouse, and Mid Market roofs.
+  * Central Mid Plaza stone fountain centerpiece with 6 lush urban canopy trees.
+  * Tactical vehicle fleet: Police interceptor cruiser, heavy transport truck, civilian SUVs.
+  * Urban road props: Industrial dumpsters, tactical construction barricades.
+  * Engine Renderer upgraded to Forward+ (D3D12), ACES Tonemapping, Enhanced Glow/Bloom, Aerial Perspective Fog (35m-220m), 4096 high-res directional shadows, MSAA 3D 2x, and Screen-Space AA (FXAA).
+================================================================================
+
