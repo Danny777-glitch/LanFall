@@ -47,6 +47,7 @@ var bookmarks: Dictionary = {
 }
 
 var output_prefix := "before_"
+var output_dir := "docs/shots/round3"
 
 
 func _init() -> void:
@@ -54,11 +55,13 @@ func _init() -> void:
 	for a in args:
 		if a.begins_with("--prefix="):
 			output_prefix = a.trim_prefix("--prefix=")
+		elif a.begins_with("--dir="):
+			output_dir = a.trim_prefix("--dir=")
 	call_deferred("_run")
 
 
 func _run() -> void:
-	DirAccess.make_dir_recursive_absolute("docs/shots/round2")
+	DirAccess.make_dir_recursive_absolute(output_dir)
 	var map_packed := load("res://scenes/maps/warehouse/warehouse_map.tscn")
 	var map_node: Node3D = map_packed.instantiate()
 	root.add_child(map_node)
@@ -82,7 +85,7 @@ func _run() -> void:
 
 		var img := root.get_texture().get_image()
 		if img and not img.is_empty():
-			var out_path := "docs/shots/round2/%s%s.png" % [output_prefix, b_name]
+			var out_path := "%s/%s%s.png" % [output_dir, output_prefix, b_name]
 			img.save_png(out_path)
 			print("[Capture] Saved %s" % out_path)
 
