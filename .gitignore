@@ -1,5 +1,10 @@
 # Godot 4 
 .godot/
+*.uid
+
+# Documentation screenshots import cache
+docs/shots/**/*.import
 
 # Video recordings / captures
 *.mp4
+

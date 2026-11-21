@@ -1,14 +1,21 @@
 [gd_scene load_steps=8 format=3 uid="uid://prop_barrier_01"]
 
-[ext_resource type="Texture2D" path="res://assets/textures/concrete_barrier_albedo.png" id="1_albedo"]
-[ext_resource type="Texture2D" path="res://assets/textures/concrete_barrier_normal.png" id="2_normal"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/chipped_concrete/chipped_concrete_diffuse_4k.jpg" id="1_albedo"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/chipped_concrete/chipped_concrete_nor_gl_4k.jpg" id="2_normal"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/chipped_concrete/chipped_concrete_arm_4k.jpg" id="conc_arm_4k"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_JerseyConcrete"]
 albedo_texture = ExtResource("1_albedo")
 normal_enabled = true
 normal_texture = ExtResource("2_normal")
-roughness = 0.85
-uv1_scale = Vector3(1, 1, 1)
+roughness_texture = ExtResource("conc_arm_4k")
+roughness_texture_channel = 1
+roughness = 0.88
+ao_enabled = true
+ao_texture = ExtResource("conc_arm_4k")
+ao_texture_channel = 0
+uv1_scale = Vector3(1.2, 1.2, 1.2)
+uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="Mat_RebarSteel"]
 albedo_color = Color(0.18, 0.20, 0.22, 1)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bgmi_perimeter_fence_002"]
 
-[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_diff_1k.jpg" id="1_wood_diff"]
-[ext_resource type="Texture2D" path="res://assets/textures/pbr/brown_planks_08_nor_gl_1k.jpg" id="2_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/brown_planks_08/brown_planks_08_diffuse_4k.jpg" id="1_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/brown_planks_08/brown_planks_08_nor_gl_4k.jpg" id="2_wood_norm"]
 [ext_resource type="Texture2D" path="res://assets/textures/wood_fence_lattice_albedo.png" id="3_lattice"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_FencePlanks"]

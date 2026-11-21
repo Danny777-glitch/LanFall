@@ -12,56 +12,56 @@ All external visual and 3D assets used in this project are 100% public domain / 
 
 ---
 
-## 2. PBR Texture Sets (1K VRAM-Optimized)
-* **Asphalt 02 (`asphalt_02`)**
+## 2. PBR Texture Sets (4K / 2K Scan-Quality with Packed ARM)
+* **Asphalt 02 (`asphalt_02`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/asphalt_02)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Weathered Wood Planks (`brown_planks_08`)**
+* **Weathered Wood Planks (`brown_planks_08`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/brown_planks_08)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Corrugated Rusted Iron (`corrugated_iron_02`)**
+* **Corrugated Rusted Iron (`corrugated_iron_02`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/corrugated_iron_02)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Industrial Container Siding (`container_side`)**
+* **Industrial Container Siding (`container_side`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/container_side)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Chipped Concrete (`chipped_concrete`)**
+* **Chipped Concrete (`chipped_concrete`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/chipped_concrete)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Dirty Industrial Concrete (`dirty_concrete`)**
+* **Dirty Industrial Concrete (`dirty_concrete`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/dirty_concrete)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Stony Dirt Path (`stony_dirt_path`)**
+* **Stony Dirt Path (`stony_dirt_path`) — 2K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/stony_dirt_path)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 2K, Normal (OpenGL) 2K, Packed ARM 2K
   - License: CC0 (Public Domain)
-* **Sparse Grass (`sparse_grass`)**
+* **Sparse Grass (`sparse_grass`) — 2K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/sparse_grass)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 2K, Normal (OpenGL) 2K, Packed ARM 2K
   - License: CC0 (Public Domain)
-* **Clay Roof Tiles (`clay_roof_tiles_02`)**
+* **Clay Roof Tiles (`clay_roof_tiles_02`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/clay_roof_tiles_02)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
-* **Tree Bark Brown (`bark_brown_01`)**
+* **Tree Bark Brown (`bark_brown_01`) — 4K**
   - Author: Rob Tuytel
   - Source: [Poly Haven](https://polyhaven.com/a/bark_brown_01)
-  - Maps: Albedo / Diffuse, Normal (GL), Roughness
+  - Maps: Albedo / Diffuse 4K, Normal (OpenGL) 4K, Packed ARM (AO/Roughness/Metallic) 4K
   - License: CC0 (Public Domain)
 
 ---
