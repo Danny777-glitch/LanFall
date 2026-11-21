@@ -24,10 +24,8 @@ roughness = 0.85
 
 [sub_resource type="StandardMaterial3D" id="Mat_HoloGlass"]
 transparency = 1
-albedo_color = Color(0.04, 0.08, 0.11, 0.4)
-roughness = 0.35
-clearcoat_enabled = true
-clearcoat = 0.2
+albedo_color = Color(0.02, 0.04, 0.06, 0.2)
+roughness = 0.45
 
 [sub_resource type="StandardMaterial3D" id="Mat_HoloReticle"]
 shading_mode = 0
@@ -202,11 +200,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032, 0)
 mesh = SubResource("Mesh_SightHood")
 
 [node name="Sight_GlassFront" type="MeshInstance3D" parent="Sight_Base/Sight_Hood"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.035)
-mesh = SubResource("Mesh_SightGlass")
-
-[node name="Sight_GlassRear" type="MeshInstance3D" parent="Sight_Base/Sight_Hood"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
 mesh = SubResource("Mesh_SightGlass")
 
 [node name="Reticle_Holo" type="MeshInstance3D" parent="Sight_Base/Sight_Hood"]

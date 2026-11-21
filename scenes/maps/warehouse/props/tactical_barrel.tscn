@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://tactical_barrel_001"]
+[gd_scene load_steps=12 format=3 uid="uid://tactical_barrel_001"]
 
 [ext_resource type="Texture2D" path="res://assets/textures/barrel_military_albedo.png" id="1_albedo"]
 [ext_resource type="Texture2D" path="res://assets/textures/barrel_military_normal.png" id="2_normal"]
@@ -16,6 +16,11 @@ albedo_color = Color(0.18, 0.20, 0.18, 1)
 metallic = 0.95
 roughness = 0.25
 
+[sub_resource type="StandardMaterial3D" id="Mat_BungPlug"]
+albedo_color = Color(0.72, 0.74, 0.76, 1)
+metallic = 0.9
+roughness = 0.3
+
 [sub_resource type="CylinderMesh" id="Mesh_Body"]
 material = SubResource("Mat_MilitaryDrum")
 top_radius = 0.42
@@ -29,6 +34,27 @@ inner_radius = 0.41
 outer_radius = 0.44
 rings = 24
 ring_segments = 8
+
+[sub_resource type="TorusMesh" id="Mesh_HoopTorus"]
+material = SubResource("Mat_MilitaryDrum")
+inner_radius = 0.415
+outer_radius = 0.435
+rings = 24
+ring_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Bung2Inch"]
+material = SubResource("Mat_BungPlug")
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.015
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Mesh_BungVent"]
+material = SubResource("Mat_BungPlug")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.012
+radial_segments = 12
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
 height = 1.25
@@ -51,3 +77,19 @@ mesh = SubResource("Mesh_RimTorus")
 [node name="BottomChime" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
 mesh = SubResource("Mesh_RimTorus")
+
+[node name="HoopMidLower" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+mesh = SubResource("Mesh_HoopTorus")
+
+[node name="HoopMidUpper" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81, 0)
+mesh = SubResource("Mesh_HoopTorus")
+
+[node name="Bung2Inch" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 1.255, 0)
+mesh = SubResource("Mesh_Bung2Inch")
+
+[node name="BungVent" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 1.254, 0)
+mesh = SubResource("Mesh_BungVent")

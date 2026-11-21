@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://tactical_crate_001"]
+[gd_scene load_steps=12 format=3 uid="uid://tactical_crate_001"]
 
 [ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/brown_planks_08/brown_planks_08_diffuse_4k.jpg" id="1_planks_diff"]
 [ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/brown_planks_08/brown_planks_08_nor_gl_4k.jpg" id="2_planks_norm"]
@@ -38,6 +38,14 @@ bottom_radius = 0.02
 height = 0.24
 radial_segments = 12
 
+[sub_resource type="BoxMesh" id="Mesh_CornerBracket"]
+material = SubResource("Mat_BlackSteelBrackets")
+size = Vector3(0.10, 0.10, 0.10)
+
+[sub_resource type="BoxMesh" id="Mesh_LidLatch"]
+material = SubResource("Mat_BlackSteelBrackets")
+size = Vector3(0.04, 0.10, 0.03)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(1.35, 0.95, 1.15)
 
@@ -66,3 +74,45 @@ mesh = SubResource("Mesh_SideHandle")
 [node name="HandleRight" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.69, 0.48, 0)
 mesh = SubResource("Mesh_SideHandle")
+
+# Steel Corner Protectors
+[node name="Corner_FL_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.05, 0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_FR_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.05, 0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_BL_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.05, -0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_BR_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.05, -0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_FL_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.91, 0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_FR_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.91, 0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_BL_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.91, -0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+[node name="Corner_BR_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.91, -0.55)
+mesh = SubResource("Mesh_CornerBracket")
+
+# Front Lock Clasps
+[node name="Latch_L" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.88, 0.58)
+mesh = SubResource("Mesh_LidLatch")
+
+[node name="Latch_R" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.88, 0.58)
+mesh = SubResource("Mesh_LidLatch")

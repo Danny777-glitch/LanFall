@@ -1,0 +1,292 @@
+import os
+
+def generate_container_scene(path, is_yellow=False):
+    mat_type = "Yellow" if is_yellow else "Rust"
+    albedo_col = "Color(0.95, 0.78, 0.28, 1)" if is_yellow else "Color(0.85, 0.48, 0.38, 1)"
+    metallic_val = 0.65
+    roughness_val = 0.55
+    uid_str = "uid://container_yellow_001" if is_yellow else "uid://container_rust_001"
+    node_name = "ContainerYellow" if is_yellow else "ContainerRust"
+
+    content = f'''[gd_scene load_steps=18 format=3 uid="{uid_str}"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/container_side/container_side_diffuse_4k.jpg" id="1_cont_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/container_side/container_side_nor_gl_4k.jpg" id="2_cont_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/container_side/container_side_arm_4k.jpg" id="3_cont_arm"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_{mat_type}Container"]
+albedo_color = {albedo_col}
+albedo_texture = ExtResource("1_cont_diff")
+normal_enabled = true
+normal_texture = ExtResource("2_cont_norm")
+roughness_texture = ExtResource("3_cont_arm")
+roughness_texture_channel = 1
+roughness = {roughness_val}
+metallic_texture = ExtResource("3_cont_arm")
+metallic_texture_channel = 2
+metallic = {metallic_val}
+ao_enabled = true
+ao_texture = ExtResource("3_cont_arm")
+ao_texture_channel = 0
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_IndustrialSteelDark"]
+albedo_color = Color(0.18, 0.19, 0.22, 1)
+metallic = 0.92
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="Mat_LockRods"]
+albedo_color = Color(0.72, 0.74, 0.76, 1)
+metallic = 0.95
+roughness = 0.30
+
+[sub_resource type="StandardMaterial3D" id="Mat_DoorGasket"]
+albedo_color = Color(0.08, 0.08, 0.08, 1)
+metallic = 0.05
+roughness = 0.92
+
+[sub_resource type="BoxMesh" id="Mesh_ContainerBody"]
+material = SubResource("Mat_{mat_type}Container")
+size = Vector3(2.40, 2.52, 6.02)
+
+[sub_resource type="BoxMesh" id="Mesh_LongRail"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(0.09, 0.14, 6.06)
+
+[sub_resource type="BoxMesh" id="Mesh_EndRail"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(2.44, 0.14, 0.09)
+
+[sub_resource type="BoxMesh" id="Mesh_CornerPost"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(0.16, 2.60, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_CornerCasting"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(0.19, 0.19, 0.19)
+
+[sub_resource type="CylinderMesh" id="Mesh_LockRod"]
+material = SubResource("Mat_LockRods")
+top_radius = 0.016
+bottom_radius = 0.016
+height = 2.42
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="Mesh_LockBracket"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(0.06, 0.07, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_DoorHinge"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(0.05, 0.12, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_CenterSeam"]
+material = SubResource("Mat_DoorGasket")
+size = Vector3(0.02, 2.44, 0.03)
+
+[sub_resource type="BoxMesh" id="Mesh_ForkliftSleeve"]
+material = SubResource("Mat_IndustrialSteelDark")
+size = Vector3(2.44, 0.12, 0.36)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_Container"]
+size = Vector3(2.46, 2.6, 6.1)
+
+[node name="{node_name}" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("BoxShape3D_Container")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+mesh = SubResource("Mesh_ContainerBody")
+
+# Top & Bottom Side Rails (Heavy Structural Perimeter)
+[node name="RailBottomL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18, 0.07, 0)
+mesh = SubResource("Mesh_LongRail")
+
+[node name="RailBottomR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0.07, 0)
+mesh = SubResource("Mesh_LongRail")
+
+[node name="RailTopL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18, 2.53, 0)
+mesh = SubResource("Mesh_LongRail")
+
+[node name="RailTopR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 2.53, 0)
+mesh = SubResource("Mesh_LongRail")
+
+# End Cross Rails
+[node name="RailFrontBottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 2.99)
+mesh = SubResource("Mesh_EndRail")
+
+[node name="RailFrontTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53, 2.99)
+mesh = SubResource("Mesh_EndRail")
+
+[node name="RailBackBottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, -2.99)
+mesh = SubResource("Mesh_EndRail")
+
+[node name="RailBackTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53, -2.99)
+mesh = SubResource("Mesh_EndRail")
+
+# 4 Heavy Vertical Corner Columns
+[node name="PostFrontLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 1.3, 2.97)
+mesh = SubResource("Mesh_CornerPost")
+
+[node name="PostFrontRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 1.3, 2.97)
+mesh = SubResource("Mesh_CornerPost")
+
+[node name="PostBackLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 1.3, -2.97)
+mesh = SubResource("Mesh_CornerPost")
+
+[node name="PostBackRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 1.3, -2.97)
+mesh = SubResource("Mesh_CornerPost")
+
+# 8 ISO Corner Castings (Top and Bottom at all 4 corners)
+[node name="Casting_FL_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 0.09, 2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_FR_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 0.09, 2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_BL_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 0.09, -2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_BR_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 0.09, -2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_FL_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 2.51, 2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_FR_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 2.51, 2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_BL_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 2.51, -2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+[node name="Casting_BR_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 2.51, -2.97)
+mesh = SubResource("Mesh_CornerCasting")
+
+# Door Face Details (Front Face z = 3.02)
+[node name="DoorCenterGasket" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 3.02)
+mesh = SubResource("Mesh_CenterSeam")
+
+# 4 Steel Door Locking Rods
+[node name="LockRod_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.3, 3.03)
+mesh = SubResource("Mesh_LockRod")
+
+[node name="LockRod_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 1.3, 3.03)
+mesh = SubResource("Mesh_LockRod")
+
+[node name="LockRod_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 1.3, 3.03)
+mesh = SubResource("Mesh_LockRod")
+
+[node name="LockRod_4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.3, 3.03)
+mesh = SubResource("Mesh_LockRod")
+
+# Cam Keepers & Handle Brackets
+[node name="Keeper_1_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 2.45, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_2_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 2.45, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_3_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 2.45, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_4_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 2.45, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_1_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.15, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_2_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.15, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_3_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 0.15, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+[node name="Keeper_4_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.15, 3.03)
+mesh = SubResource("Mesh_LockBracket")
+
+# Door Hinges (4 on Left, 4 on Right)
+[node name="Hinge_L1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21, 0.38, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_L2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21, 0.98, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_L3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21, 1.58, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_L4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21, 2.18, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_R1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21, 0.38, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_R2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21, 0.98, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_R3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21, 1.58, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+[node name="Hinge_R4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21, 2.18, 3.01)
+mesh = SubResource("Mesh_DoorHinge")
+
+# Forklift Pockets
+[node name="ForkliftPocket_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, -0.85)
+mesh = SubResource("Mesh_ForkliftSleeve")
+
+[node name="ForkliftPocket_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.85)
+mesh = SubResource("Mesh_ForkliftSleeve")
+'''
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"Generated realistic container scene: {path}")
+
+if __name__ == "__main__":
+    generate_container_scene("scenes/maps/warehouse/props/container_rust_prop.tscn", is_yellow=False)
+    generate_container_scene("scenes/maps/warehouse/props/container_yellow_prop.tscn", is_yellow=True)
