@@ -4,6 +4,8 @@
 
 # Documentation screenshots import cache
 docs/shots/**/*.import
+docs/perf/**/*.import
+*.translation
 
 # Video recordings / captures
 *.mp4
