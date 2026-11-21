@@ -8,3 +8,7 @@ docs/shots/**/*.import
 # Video recordings / captures
 *.mp4
 
+# Standalone exported builds & packages (recreatable via --export-pack)
+builds/
+*.pck
+

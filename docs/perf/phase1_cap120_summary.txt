@@ -1,0 +1,13 @@
+
+===========================================================================
+  BENCHMARK SUMMARY: PHASE1_CAP120 (Cap: 120 FPS | Duration: 30s | Preset: HIGH)
+===========================================================================
+  Average Power Draw:       25.2 W   (Peak:   35.9 W)
+  Average GPU Load:         27.7 %   (Peak:   56.0 %)
+  Average Temperature:      45.8 °C  (Peak:   48.4 °C)
+  Average Frame Rate:      114.0 FPS (Min:   1.0, Max: 120.0)
+  Average Frame Time:       8.32 ms
+  Average VRAM Memory:    1499.7 MB
+  Average Draw Calls:        500 DC
+===========================================================================
+Merged data written to: docs/perf/phase1_cap120.csv

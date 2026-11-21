@@ -70,6 +70,10 @@ func _get_net_mgr() -> Node:
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	var perf := get_node_or_null("/root/PerfSettings")
+	if perf:
+		perf.set_in_menu(true)
+
 	_update_profile_ui()
 	_setup_network_ui()
 	_setup_inventory_tabs()
@@ -337,6 +341,13 @@ func _setup_network_ui() -> void:
 	close_lan_btn.pressed.connect(func(): lan_dialog.visible = false)
 
 
+func _launch_map() -> void:
+	var perf := get_node_or_null("/root/PerfSettings")
+	if perf:
+		perf.set_in_menu(false)
+	get_tree().change_scene_to_file(MAP_SCENE_PATH)
+
+
 func _on_start_pressed() -> void:
 	var prof = _get_profile()
 	var net = _get_net_mgr()
@@ -345,7 +356,7 @@ func _on_start_pressed() -> void:
 	if net and net.has_method("start_singleplayer"):
 		net.start_singleplayer(p_name)
 
-	get_tree().change_scene_to_file(MAP_SCENE_PATH)
+	_launch_map()
 
 
 func _on_solo_warmup_pressed() -> void:
@@ -364,12 +375,12 @@ func _on_host_pressed() -> void:
 		var err: Error = net.host_game(p_name, 7777)
 		if err == OK:
 			status_label.text = "HOST READY! LAUNCHING MAP..."
-			get_tree().change_scene_to_file(MAP_SCENE_PATH)
+			_launch_map()
 		else:
 			status_label.text = "ERROR HOSTING: %s" % error_string(err)
 			status_label.modulate = Color(1.0, 0.3, 0.3)
 	else:
-		get_tree().change_scene_to_file(MAP_SCENE_PATH)
+		_launch_map()
 
 
 func _on_join_pressed() -> void:
@@ -393,7 +404,7 @@ func _on_join_pressed() -> void:
 			join_btn.disabled = false
 		else:
 			net.server_joined.connect(func():
-				get_tree().change_scene_to_file(MAP_SCENE_PATH)
+				_launch_map()
 			)
 	else:
-		get_tree().change_scene_to_file(MAP_SCENE_PATH)
+		_launch_map()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d4cmgsylsknn0"
+
+[deps]
+
+files=["res://docs/perf/baseline.bookmark.translation", "res://docs/perf/baseline.fps.translation", "res://docs/perf/baseline.frame.translation", "res://docs/perf/baseline.draw.translation", "res://docs/perf/baseline.primitives.translation", "res://docs/perf/baseline.vram.translation", "res://docs/perf/baseline.texture.translation", "res://docs/perf/baseline.objects.translation", "res://docs/perf/baseline.power.translation", "res://docs/perf/baseline.utilization.translation", "res://docs/perf/baseline.temp.translation", "res://docs/perf/baseline.clock.translation", "res://docs/perf/baseline.clock.translation"]
+
+source_file="res://docs/perf/baseline.csv"
+dest_files=["res://docs/perf/baseline.bookmark.translation", "res://docs/perf/baseline.fps.translation", "res://docs/perf/baseline.frame.translation", "res://docs/perf/baseline.draw.translation", "res://docs/perf/baseline.primitives.translation", "res://docs/perf/baseline.vram.translation", "res://docs/perf/baseline.texture.translation", "res://docs/perf/baseline.objects.translation", "res://docs/perf/baseline.power.translation", "res://docs/perf/baseline.utilization.translation", "res://docs/perf/baseline.temp.translation", "res://docs/perf/baseline.clock.translation", "res://docs/perf/baseline.clock.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b0vx8flg88w7v"
+
+[deps]
+
+files=["res://docs/perf/phase1_cap144_engine.bookmark.translation", "res://docs/perf/phase1_cap144_engine.fps.translation", "res://docs/perf/phase1_cap144_engine.frame.translation", "res://docs/perf/phase1_cap144_engine.draw.translation", "res://docs/perf/phase1_cap144_engine.primitives.translation", "res://docs/perf/phase1_cap144_engine.vram.translation", "res://docs/perf/phase1_cap144_engine.texture.translation", "res://docs/perf/phase1_cap144_engine.objects.translation"]
+
+source_file="res://docs/perf/phase1_cap144_engine.csv"
+dest_files=["res://docs/perf/phase1_cap144_engine.bookmark.translation", "res://docs/perf/phase1_cap144_engine.fps.translation", "res://docs/perf/phase1_cap144_engine.frame.translation", "res://docs/perf/phase1_cap144_engine.draw.translation", "res://docs/perf/phase1_cap144_engine.primitives.translation", "res://docs/perf/phase1_cap144_engine.vram.translation", "res://docs/perf/phase1_cap144_engine.texture.translation", "res://docs/perf/phase1_cap144_engine.objects.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

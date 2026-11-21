@@ -1,0 +1,13 @@
+
+===========================================================================
+  BENCHMARK SUMMARY: PHASE1_CAP60 (Cap: 60 FPS | Duration: 30s | Preset: HIGH)
+===========================================================================
+  Average Power Draw:       17.1 W   (Peak:   22.0 W)
+  Average GPU Load:         16.6 %   (Peak:   27.0 %)
+  Average Temperature:      45.0 °C  (Peak:   45.5 °C)
+  Average Frame Rate:       57.3 FPS (Min:   1.0, Max:  60.0)
+  Average Frame Time:      16.65 ms
+  Average VRAM Memory:    1499.7 MB
+  Average Draw Calls:        516 DC
+===========================================================================
+Merged data written to: docs/perf/phase1_cap60.csv

@@ -1,0 +1,13 @@
+
+===========================================================================
+  BENCHMARK SUMMARY: BASELINE_RELEASE_90S (Cap: 0 FPS | Duration: 90s | Preset: HIGH)
+===========================================================================
+  Average Power Draw:       89.5 W   (Peak:  102.0 W)
+  Average GPU Load:         90.7 %   (Peak:   99.0 %)
+  Average Temperature:      66.0 °C  (Peak:   72.5 °C)
+  Average Frame Rate:      489.6 FPS (Min:   2.0, Max: 597.0)
+  Average Frame Time:       2.01 ms
+  Average VRAM Memory:    1499.2 MB
+  Average Draw Calls:        499 DC
+===========================================================================
+Merged data written to: docs/perf/baseline_release_90s.csv

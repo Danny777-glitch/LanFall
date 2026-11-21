@@ -1,0 +1,13 @@
+
+===========================================================================
+  BENCHMARK SUMMARY: PHASE1_CAP144 (Cap: 144 FPS | Duration: 30s | Preset: HIGH)
+===========================================================================
+  Average Power Draw:       34.0 W   (Peak:   48.5 W)
+  Average GPU Load:         30.7 %   (Peak:   53.0 %)
+  Average Temperature:      47.2 °C  (Peak:   50.2 °C)
+  Average Frame Rate:      136.5 FPS (Min:   1.0, Max: 144.0)
+  Average Frame Time:       6.96 ms
+  Average VRAM Memory:    1499.7 MB
+  Average Draw Calls:        495 DC
+===========================================================================
+Merged data written to: docs/perf/phase1_cap144.csv

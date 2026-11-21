@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://qq8sqyfa7x8p"
+
+[deps]
+
+files=["res://docs/perf/baseline_release_90s_engine.bookmark.translation", "res://docs/perf/baseline_release_90s_engine.fps.translation", "res://docs/perf/baseline_release_90s_engine.frame.translation", "res://docs/perf/baseline_release_90s_engine.draw.translation", "res://docs/perf/baseline_release_90s_engine.primitives.translation", "res://docs/perf/baseline_release_90s_engine.vram.translation", "res://docs/perf/baseline_release_90s_engine.texture.translation", "res://docs/perf/baseline_release_90s_engine.objects.translation"]
+
+source_file="res://docs/perf/baseline_release_90s_engine.csv"
+dest_files=["res://docs/perf/baseline_release_90s_engine.bookmark.translation", "res://docs/perf/baseline_release_90s_engine.fps.translation", "res://docs/perf/baseline_release_90s_engine.frame.translation", "res://docs/perf/baseline_release_90s_engine.draw.translation", "res://docs/perf/baseline_release_90s_engine.primitives.translation", "res://docs/perf/baseline_release_90s_engine.vram.translation", "res://docs/perf/baseline_release_90s_engine.texture.translation", "res://docs/perf/baseline_release_90s_engine.objects.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cxn6aaw0vr3to"
+
+[deps]
+
+files=["res://docs/perf/baseline_engine.bookmark.translation", "res://docs/perf/baseline_engine.fps.translation", "res://docs/perf/baseline_engine.frame.translation", "res://docs/perf/baseline_engine.draw.translation", "res://docs/perf/baseline_engine.primitives.translation", "res://docs/perf/baseline_engine.vram.translation", "res://docs/perf/baseline_engine.texture.translation", "res://docs/perf/baseline_engine.objects.translation"]
+
+source_file="res://docs/perf/baseline_engine.csv"
+dest_files=["res://docs/perf/baseline_engine.bookmark.translation", "res://docs/perf/baseline_engine.fps.translation", "res://docs/perf/baseline_engine.frame.translation", "res://docs/perf/baseline_engine.draw.translation", "res://docs/perf/baseline_engine.primitives.translation", "res://docs/perf/baseline_engine.vram.translation", "res://docs/perf/baseline_engine.texture.translation", "res://docs/perf/baseline_engine.objects.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

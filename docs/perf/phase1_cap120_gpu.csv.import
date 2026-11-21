@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dgoygb0l8fgq6"
+
+[deps]
+
+files=["res://docs/perf/phase1_cap120_gpu.utilization.translation", "res://docs/perf/phase1_cap120_gpu.temp.translation", "res://docs/perf/phase1_cap120_gpu.clock.translation", "res://docs/perf/phase1_cap120_gpu.clock.translation"]
+
+source_file="res://docs/perf/phase1_cap120_gpu.csv"
+dest_files=["res://docs/perf/phase1_cap120_gpu.utilization.translation", "res://docs/perf/phase1_cap120_gpu.temp.translation", "res://docs/perf/phase1_cap120_gpu.clock.translation", "res://docs/perf/phase1_cap120_gpu.clock.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

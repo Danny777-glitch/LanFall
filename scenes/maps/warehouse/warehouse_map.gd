@@ -47,6 +47,11 @@ func _ready() -> void:
 		if not get_node_or_null("Player") and players_container and players_container.get_child_count() == 0:
 			_spawn_player(1)
 
+	var perf := get_node_or_null("/root/PerfSettings")
+	if perf:
+		perf.set_in_menu(false)
+		apply_quality_preset(perf.quality_preset)
+
 
 func _spawn_player(peer_id: int) -> void:
 	if not players_container:
@@ -115,6 +120,22 @@ func apply_quality_preset(preset: String) -> void:
 	var env: Environment = env_node.environment
 
 	match preset.to_upper():
+		"POWER_SAVER":
+			# Maximum Battery / Cool Whisper Fan Preset (Cap 60 FPS, Low Power)
+			env.sdfgi_enabled = false
+			env.ssil_enabled = false
+			env.ssao_enabled = true
+			env.ssao_radius = 1.0
+			env.ssao_intensity = 1.2
+			env.ssr_enabled = false
+			env.volumetric_fog_enabled = false
+			env.glow_enabled = false
+			if sun_node:
+				sun_node.directional_shadow_blend_splits = false
+				sun_node.shadow_blur = 1.0
+				sun_node.directional_shadow_max_distance = 55.0
+			print("[Graphics] Applied preset: POWER_SAVER (Cool & Silent)")
+
 		"LOW":
 			# High FPS / Integrated GPU / Low VRAM (~1.0 GB)
 			env.sdfgi_enabled = false

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://p2p71j8ts84g"
+
+[deps]
+
+files=["res://docs/perf/baseline_release_90s.bookmark.translation", "res://docs/perf/baseline_release_90s.fps.translation", "res://docs/perf/baseline_release_90s.frame.translation", "res://docs/perf/baseline_release_90s.draw.translation", "res://docs/perf/baseline_release_90s.primitives.translation", "res://docs/perf/baseline_release_90s.vram.translation", "res://docs/perf/baseline_release_90s.texture.translation", "res://docs/perf/baseline_release_90s.objects.translation", "res://docs/perf/baseline_release_90s.power.translation", "res://docs/perf/baseline_release_90s.utilization.translation", "res://docs/perf/baseline_release_90s.temp.translation", "res://docs/perf/baseline_release_90s.clock.translation", "res://docs/perf/baseline_release_90s.clock.translation"]
+
+source_file="res://docs/perf/baseline_release_90s.csv"
+dest_files=["res://docs/perf/baseline_release_90s.bookmark.translation", "res://docs/perf/baseline_release_90s.fps.translation", "res://docs/perf/baseline_release_90s.frame.translation", "res://docs/perf/baseline_release_90s.draw.translation", "res://docs/perf/baseline_release_90s.primitives.translation", "res://docs/perf/baseline_release_90s.vram.translation", "res://docs/perf/baseline_release_90s.texture.translation", "res://docs/perf/baseline_release_90s.objects.translation", "res://docs/perf/baseline_release_90s.power.translation", "res://docs/perf/baseline_release_90s.utilization.translation", "res://docs/perf/baseline_release_90s.temp.translation", "res://docs/perf/baseline_release_90s.clock.translation", "res://docs/perf/baseline_release_90s.clock.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

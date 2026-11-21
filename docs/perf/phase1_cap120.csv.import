@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c2ehjq8o4t3ld"
+
+[deps]
+
+files=["res://docs/perf/phase1_cap120.bookmark.translation", "res://docs/perf/phase1_cap120.fps.translation", "res://docs/perf/phase1_cap120.frame.translation", "res://docs/perf/phase1_cap120.draw.translation", "res://docs/perf/phase1_cap120.primitives.translation", "res://docs/perf/phase1_cap120.vram.translation", "res://docs/perf/phase1_cap120.texture.translation", "res://docs/perf/phase1_cap120.objects.translation", "res://docs/perf/phase1_cap120.power.translation", "res://docs/perf/phase1_cap120.utilization.translation", "res://docs/perf/phase1_cap120.temp.translation", "res://docs/perf/phase1_cap120.clock.translation", "res://docs/perf/phase1_cap120.clock.translation"]
+
+source_file="res://docs/perf/phase1_cap120.csv"
+dest_files=["res://docs/perf/phase1_cap120.bookmark.translation", "res://docs/perf/phase1_cap120.fps.translation", "res://docs/perf/phase1_cap120.frame.translation", "res://docs/perf/phase1_cap120.draw.translation", "res://docs/perf/phase1_cap120.primitives.translation", "res://docs/perf/phase1_cap120.vram.translation", "res://docs/perf/phase1_cap120.texture.translation", "res://docs/perf/phase1_cap120.objects.translation", "res://docs/perf/phase1_cap120.power.translation", "res://docs/perf/phase1_cap120.utilization.translation", "res://docs/perf/phase1_cap120.temp.translation", "res://docs/perf/phase1_cap120.clock.translation", "res://docs/perf/phase1_cap120.clock.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

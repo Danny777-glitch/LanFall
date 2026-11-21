@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://clpmkm53nwswf"
+
+[deps]
+
+files=["res://docs/perf/baseline_release_90s_gpu.utilization.translation", "res://docs/perf/baseline_release_90s_gpu.temp.translation", "res://docs/perf/baseline_release_90s_gpu.clock.translation", "res://docs/perf/baseline_release_90s_gpu.clock.translation"]
+
+source_file="res://docs/perf/baseline_release_90s_gpu.csv"
+dest_files=["res://docs/perf/baseline_release_90s_gpu.utilization.translation", "res://docs/perf/baseline_release_90s_gpu.temp.translation", "res://docs/perf/baseline_release_90s_gpu.clock.translation", "res://docs/perf/baseline_release_90s_gpu.clock.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
