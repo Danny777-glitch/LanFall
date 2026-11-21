@@ -173,22 +173,26 @@ func apply_quality_preset(preset: String) -> void:
 			env.sdfgi_cascades = 4
 			env.sdfgi_min_cell_size = 0.25
 			env.sdfgi_bounce_feedback = 0.45
+			env.sdfgi_max_distance = 100.0
+			env.sdfgi_y_scale = 1
 			env.ssil_enabled = true
-			env.ssil_radius = 5.0
+			env.ssil_radius = 4.5
 			env.ssil_intensity = 0.8
 			env.ssao_enabled = true
 			env.ssao_radius = 1.5
 			env.ssao_intensity = 1.8
 			env.ssr_enabled = true
-			env.ssr_max_steps = 32
+			env.ssr_max_steps = 24
 			env.volumetric_fog_enabled = true
 			env.volumetric_fog_density = 0.008
+			env.volumetric_fog_length = 70.0
+			env.volumetric_fog_temporal_reprojection_enabled = true
 			env.glow_enabled = true
 			env.glow_intensity = 0.25
 			if sun_node:
 				sun_node.directional_shadow_blend_splits = true
 				sun_node.shadow_blur = 1.4
-				sun_node.directional_shadow_max_distance = 90.0
+				sun_node.directional_shadow_max_distance = 85.0
 			print("[Graphics] Applied preset: HIGH (RTX 3050 Target)")
 
 		"ULTRA":
