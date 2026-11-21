@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" path="res://assets/textures/pbr/stony_dirt_path_diff_1k.jpg" id="5_dirt_diff"]
 [ext_resource type="Texture2D" path="res://assets/textures/pbr/stony_dirt_path_nor_gl_1k.jpg" id="6_dirt_norm"]
 [ext_resource type="Texture2D" path="res://assets/textures/pbr/stony_dirt_path_rough_1k.jpg" id="7_dirt_rough"]
-[ext_resource type="Texture2D" path="res://assets/textures/sky_erangel_daylight.png" id="8_sky"]
+[ext_resource type="Texture2D" path="res://assets/textures/farmland_overcast_1k.hdr" id="8_sky"]
 [ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/asphalt_02/asphalt_02_diffuse_4k.jpg" id="asphalt_diff_4k"]
 [ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/asphalt_02/asphalt_02_nor_gl_4k.jpg" id="asphalt_norm_4k"]
 [ext_resource type="Texture2D" path="res://assets/textures/pbr_4k/asphalt_02/asphalt_02_arm_4k.jpg" id="asphalt_arm_4k"]
@@ -38,21 +38,37 @@ sky_material = SubResource("PanoramaSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 ambient_light_source = 3
-ambient_light_sky_contribution = 0.7
-ambient_light_color = Color(0.85, 0.88, 0.92, 1)
-ambient_light_energy = 1.05
+ambient_light_sky_contribution = 0.85
+ambient_light_color = Color(0.88, 0.90, 0.94, 1)
+ambient_light_energy = 1.15
 tonemap_mode = 3
-tonemap_exposure = 0.96
+tonemap_exposure = 1.05
+ssr_enabled = true
+ssr_max_steps = 64
 ssao_enabled = true
-ssao_radius = 1.4
-ssao_intensity = 1.5
+ssao_radius = 1.6
+ssao_intensity = 2.2
+ssao_power = 1.5
+ssao_detail = 0.5
+ssil_enabled = true
+ssil_radius = 5.0
+ssil_intensity = 1.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = true
+sdfgi_bounce_feedback = 0.5
+sdfgi_cascades = 4
+sdfgi_min_cell_size = 0.25
 glow_enabled = true
-glow_intensity = 0.14
-glow_bloom = 0.05
-fog_enabled = true
-fog_light_color = Color(0.78, 0.82, 0.88, 1)
-fog_density = 0.0025
-fog_aerial_perspective = 0.25
+glow_normalized = true
+glow_intensity = 0.25
+glow_bloom = 0.08
+glow_blend_mode = 1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.008
+volumetric_fog_albedo = Color(0.82, 0.86, 0.92, 1)
+volumetric_fog_emission = Color(0.04, 0.05, 0.07, 1)
+volumetric_fog_anisotropy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="Mat_GrassTerrain"]
 albedo_texture = ExtResource("2_grass_diff")
@@ -137,16 +153,17 @@ environment = SubResource("Environment_BGMI")
 
 [node name="Sun" type="DirectionalLight3D" parent="."] 
 transform = Transform3D(-0.766044, -0.321394, 0.55667, 0, 0.866025, 0.5, -0.642788, 0.383022, -0.663414, 0, 45, 0)
-light_color = Color(1.0, 0.96, 0.88, 1)
-light_energy = 1.38
+light_color = Color(1.0, 0.96, 0.90, 1)
+light_energy = 1.45
+light_angular_distance = 1.2
 shadow_enabled = true
-shadow_bias = 0.02
-directional_shadow_split_1 = 0.12
-directional_shadow_split_2 = 0.3
-directional_shadow_split_3 = 0.6
-directional_shadow_blend_splits = false
-directional_shadow_max_distance = 80.0
-shadow_blur = 1.0
+shadow_bias = 0.015
+directional_shadow_split_1 = 0.10
+directional_shadow_split_2 = 0.25
+directional_shadow_split_3 = 0.55
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 90.0
+shadow_blur = 1.4
 
 [node name="Terrain" type="Node3D" parent="."] 
 

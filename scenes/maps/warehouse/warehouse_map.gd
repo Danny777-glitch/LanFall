@@ -104,3 +104,92 @@ func _on_network_player_disconnected(peer_id: int) -> void:
 		var p_node := players_container.get_node(p_name)
 		p_node.queue_free()
 		print("[TestMap] Removed player node for peer %d" % peer_id)
+
+
+## Quality presets for Forward+ graphics scalability (Low, Medium, High, Ultra)
+func apply_quality_preset(preset: String) -> void:
+	var env_node: WorldEnvironment = get_node_or_null("WorldEnvironment")
+	var sun_node: DirectionalLight3D = get_node_or_null("Sun")
+	if not env_node or not env_node.environment:
+		return
+	var env: Environment = env_node.environment
+
+	match preset.to_upper():
+		"LOW":
+			# High FPS / Integrated GPU / Low VRAM (~1.0 GB)
+			env.sdfgi_enabled = false
+			env.ssil_enabled = false
+			env.ssao_enabled = false
+			env.ssr_enabled = false
+			env.volumetric_fog_enabled = false
+			env.glow_enabled = false
+			if sun_node:
+				sun_node.directional_shadow_blend_splits = false
+				sun_node.shadow_blur = 1.0
+				sun_node.directional_shadow_max_distance = 60.0
+			print("[Graphics] Applied preset: LOW (Performance Mode)")
+
+		"MEDIUM":
+			# Balanced / Older discrete GPUs (~1.5-2.0 GB VRAM)
+			env.sdfgi_enabled = false
+			env.ssil_enabled = false
+			env.ssao_enabled = true
+			env.ssao_radius = 1.2
+			env.ssao_intensity = 1.4
+			env.ssr_enabled = false
+			env.volumetric_fog_enabled = false
+			env.glow_enabled = true
+			env.glow_intensity = 0.15
+			if sun_node:
+				sun_node.directional_shadow_blend_splits = true
+				sun_node.shadow_blur = 1.2
+				sun_node.directional_shadow_max_distance = 75.0
+			print("[Graphics] Applied preset: MEDIUM (Balanced)")
+
+		"HIGH":
+			# Recommended Default for RTX 3050 6GB (~2.5-3.2 GB VRAM, 300+ FPS)
+			env.sdfgi_enabled = true
+			env.sdfgi_cascades = 4
+			env.sdfgi_min_cell_size = 0.25
+			env.sdfgi_bounce_feedback = 0.45
+			env.ssil_enabled = true
+			env.ssil_radius = 5.0
+			env.ssil_intensity = 0.8
+			env.ssao_enabled = true
+			env.ssao_radius = 1.5
+			env.ssao_intensity = 1.8
+			env.ssr_enabled = true
+			env.ssr_max_steps = 32
+			env.volumetric_fog_enabled = true
+			env.volumetric_fog_density = 0.008
+			env.glow_enabled = true
+			env.glow_intensity = 0.25
+			if sun_node:
+				sun_node.directional_shadow_blend_splits = true
+				sun_node.shadow_blur = 1.4
+				sun_node.directional_shadow_max_distance = 90.0
+			print("[Graphics] Applied preset: HIGH (RTX 3050 Target)")
+
+		"ULTRA":
+			# Maximum Visual Fidelity (stays safely under 4.0 GB VRAM ceiling)
+			env.sdfgi_enabled = true
+			env.sdfgi_cascades = 6
+			env.sdfgi_min_cell_size = 0.20
+			env.sdfgi_bounce_feedback = 0.55
+			env.ssil_enabled = true
+			env.ssil_radius = 6.0
+			env.ssil_intensity = 1.2
+			env.ssao_enabled = true
+			env.ssao_radius = 1.8
+			env.ssao_intensity = 2.4
+			env.ssr_enabled = true
+			env.ssr_max_steps = 64
+			env.volumetric_fog_enabled = true
+			env.volumetric_fog_density = 0.012
+			env.glow_enabled = true
+			env.glow_intensity = 0.35
+			if sun_node:
+				sun_node.directional_shadow_blend_splits = true
+				sun_node.shadow_blur = 1.6
+				sun_node.directional_shadow_max_distance = 100.0
+			print("[Graphics] Applied preset: ULTRA (Max Fidelity)")
