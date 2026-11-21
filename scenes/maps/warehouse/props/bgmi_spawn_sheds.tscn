@@ -39,7 +39,8 @@ normal_enabled = true
 normal_texture = ExtResource("5_roof_norm")
 metallic = 0.65
 roughness = 0.55
-uv1_scale = Vector3(4, 3, 1)
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="Mat_Firewood"]
 albedo_texture = ExtResource("6_bark_diff")
@@ -166,7 +167,7 @@ mesh = SubResource("Mesh_HeavyPost")
 
 # Overhead Heavy Corrugated Slate Pitch Roof
 [node name="RoofMain" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 4.8, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0.0)
 mesh = SubResource("Mesh_RoofSlab")
 
 [node name="FasciaBeamFront" type="MeshInstance3D" parent="."]
@@ -178,25 +179,25 @@ mesh = SubResource("Mesh_FasciaBeam")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.5, 0.3, 1.2)
 
 [node name="AmmoLeft1" parent="." instance=ExtResource("11_ammo")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -7.2, 1.45, 1.1)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -7.2, 0.82, 1.1)
 
 [node name="AmmoLeft2" parent="." instance=ExtResource("11_ammo")]
-transform = Transform3D(1.1, 0, 0.4, 0, 1.2, 0, -0.4, 0, 1.1, -6.0, 1.45, 1.1)
+transform = Transform3D(1.159111, 0, 0.310583, 0, 1.2, 0, -0.310583, 0, 1.159111, -6.0, 0.82, 1.1)
 
 [node name="RifleLeft" parent="." instance=ExtResource("12_rifle")]
-transform = Transform3D(0.9, 0, 0, 0, 0, -0.9, 0, 0.9, 0, -6.6, 1.48, 1.2)
+transform = Transform3D(0.9, 0, 0, 0, 0, -0.9, 0, 0.9, 0, -6.6, 0.84, 1.2)
 
 [node name="TableRight" parent="." instance=ExtResource("10_table")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6.5, 0.3, 1.2)
 
 [node name="AmmoRight1" parent="." instance=ExtResource("11_ammo")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6.0, 1.45, 1.1)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6.0, 0.82, 1.1)
 
 [node name="AmmoRight2" parent="." instance=ExtResource("11_ammo")]
-transform = Transform3D(1.1, 0, -0.4, 0, 1.2, 0, 0.4, 0, 1.1, 7.2, 1.45, 1.1)
+transform = Transform3D(1.159111, 0, -0.310583, 0, 1.2, 0, 0.310583, 0, 1.159111, 7.2, 0.82, 1.1)
 
 [node name="SniperRight" parent="." instance=ExtResource("13_sniper")]
-transform = Transform3D(0.9, 0, 0, 0, 0, -0.9, 0, 0.9, 0, 6.6, 1.48, 1.2)
+transform = Transform3D(0.9, 0, 0, 0, 0, -0.9, 0, 0.9, 0, 6.6, 0.84, 1.2)
 
 # Firewood logs stack on the left
 [node name="FirewoodLog1" type="MeshInstance3D" parent="."]

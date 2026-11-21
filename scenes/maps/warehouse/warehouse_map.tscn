@@ -38,12 +38,17 @@ ambient_light_sky_contribution = 0.7
 ambient_light_color = Color(0.85, 0.88, 0.92, 1)
 ambient_light_energy = 1.05
 tonemap_mode = 3
-tonemap_exposure = 1.08
-ssao_enabled = false
+tonemap_exposure = 0.96
+ssao_enabled = true
+ssao_radius = 1.4
+ssao_intensity = 1.5
 glow_enabled = true
-glow_intensity = 0.16
-glow_bloom = 0.06
-fog_enabled = false
+glow_intensity = 0.14
+glow_bloom = 0.05
+fog_enabled = true
+fog_light_color = Color(0.78, 0.82, 0.88, 1)
+fog_density = 0.0025
+fog_aerial_perspective = 0.25
 
 [sub_resource type="StandardMaterial3D" id="Mat_GrassTerrain"]
 albedo_texture = ExtResource("2_grass_diff")
@@ -51,7 +56,8 @@ normal_enabled = true
 normal_texture = ExtResource("3_grass_norm")
 roughness_texture = ExtResource("4_grass_rough")
 roughness = 0.9
-uv1_scale = Vector3(12, 24, 1)
+uv1_scale = Vector3(4, 4, 4)
+uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="Mat_DirtRoadways"]
 albedo_texture = ExtResource("5_dirt_diff")
@@ -59,7 +65,8 @@ normal_enabled = true
 normal_texture = ExtResource("6_dirt_norm")
 roughness_texture = ExtResource("7_dirt_rough")
 roughness = 0.92
-uv1_scale = Vector3(3, 20, 1)
+uv1_scale = Vector3(3, 3, 3)
+uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_Ground"]
 size = Vector3(50, 0.4, 106)

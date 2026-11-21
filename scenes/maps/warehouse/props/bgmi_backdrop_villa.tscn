@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgmi_backdrop_villa_pbr_001"]
+[gd_scene load_steps=9 format=3 uid="uid://bgmi_backdrop_villa_pbr_001"]
 
 [ext_resource type="Texture2D" path="res://assets/textures/villa_facade_albedo.png" id="1_facade"]
 [ext_resource type="Texture2D" path="res://assets/textures/villa_facade_normal.png" id="2_facade_norm"]
@@ -28,9 +28,13 @@ size = Vector3(18.0, 9.0, 12.0)
 material = SubResource("Mat_VillaWalls")
 size = Vector3(18.0, 6.0, 12.0)
 
-[sub_resource type="BoxMesh" id="Mesh_RoofLeft"]
+[sub_resource type="BoxMesh" id="Mesh_RoofSlope"]
 material = SubResource("Mat_VillaRoof")
-size = Vector3(19.0, 0.35, 7.5)
+size = Vector3(19.0, 0.35, 6.8)
+
+[sub_resource type="BoxMesh" id="Mesh_RidgeCap"]
+material = SubResource("Mat_VillaRoof")
+size = Vector3(19.2, 0.3, 0.6)
 
 [node name="BGMI_BackdropVilla" type="StaticBody3D"]
 
@@ -43,9 +47,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0, 0)
 mesh = SubResource("Mesh_VillaBody")
 
 [node name="RoofSlopeSouth" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 7.8, 3.0)
-mesh = SubResource("Mesh_RoofLeft")
+transform = Transform3D(1, 0, 0, 0, 0.927184, -0.374607, 0, 0.374607, 0.927184, 0, 6.9, 3.0)
+mesh = SubResource("Mesh_RoofSlope")
 
 [node name="RoofSlopeNorth" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 7.8, -3.0)
-mesh = SubResource("Mesh_RoofLeft")
+transform = Transform3D(1, 0, 0, 0, 0.927184, 0.374607, 0, -0.374607, 0.927184, 0, 6.9, -3.0)
+mesh = SubResource("Mesh_RoofSlope")
+
+[node name="RidgeCap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2, 0)
+mesh = SubResource("Mesh_RidgeCap")

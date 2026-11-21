@@ -7,7 +7,7 @@
 # ============================================================================
 extends Node3D
 
-const MAP_SCENE_PATH = "res://maps/warehouse_yard.tscn"
+const MAP_SCENE_PATH = "res://scenes/maps/warehouse/warehouse_map.tscn"
 
 # 3D Node References
 @onready var character_model: Node3D = $CharacterShowcase/CharacterModel

@@ -4,18 +4,18 @@
 
 [sub_resource type="StandardMaterial3D" id="Mat_CarbonChassis"]
 albedo_color = Color(0.13, 0.14, 0.17, 1)
-metallic = 0.72
-roughness = 0.28
+metallic = 0.35
+roughness = 0.55
 
 [sub_resource type="StandardMaterial3D" id="Mat_GunmetalSteel"]
 albedo_color = Color(0.18, 0.20, 0.24, 1)
-metallic = 0.95
-roughness = 0.22
+metallic = 0.55
+roughness = 0.45
 
 [sub_resource type="StandardMaterial3D" id="Mat_AccentAlloy"]
 albedo_color = Color(0.12, 0.13, 0.15, 1)
-metallic = 0.85
-roughness = 0.32
+metallic = 0.45
+roughness = 0.50
 
 [sub_resource type="StandardMaterial3D" id="Mat_StippledPolymer"]
 albedo_color = Color(0.08, 0.09, 0.10, 1)
@@ -24,10 +24,10 @@ roughness = 0.85
 
 [sub_resource type="StandardMaterial3D" id="Mat_ScopeLensGlass"]
 transparency = 1
-albedo_color = Color(0.04, 0.08, 0.11, 0.75)
-roughness = 0.04
+albedo_color = Color(0.04, 0.08, 0.11, 0.5)
+roughness = 0.35
 clearcoat_enabled = true
-clearcoat = 1.0
+clearcoat = 0.2
 
 [sub_resource type="StandardMaterial3D" id="Mat_RadianiteCore"]
 albedo_color = Color(0.14, 0.15, 0.18, 1)

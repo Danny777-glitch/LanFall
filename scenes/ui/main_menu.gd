@@ -3,7 +3,7 @@
 # ============================================================================
 extends Control
 
-const MAP_SCENE_PATH = "res://maps/warehouse_yard.tscn"
+const MAP_SCENE_PATH = "res://scenes/maps/warehouse/warehouse_map.tscn"
 
 @onready var name_input: LineEdit = $Panel/VBox/NameBox/NameInput
 @onready var solo_btn: Button = $Panel/VBox/SoloBtn
