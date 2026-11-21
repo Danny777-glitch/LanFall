@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="20_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="21_pause"]
 [ext_resource type="PackedScene" path="res://scenes/objects/target_dummy.tscn" id="22_dummy"]
+[ext_resource type="PackedScene" path="res://scenes/maps/warehouse/spawn_point.tscn" id="23_spawn"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1"]
 panorama = ExtResource("8_sky")
@@ -84,7 +85,33 @@ size = Vector3(50.0, 8.0, 1.0)
 [node name="WarehouseMap" type="Node3D"]
 script = ExtResource("1_script")
 
-[node name="Players" type="Node3D" parent="."] 
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Spawn_South_MidL" parent="Spawns" instance=ExtResource("23_spawn")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.0, 0.05, 36.0)
+team = 1
+
+[node name="Spawn_North_MidR" parent="Spawns" instance=ExtResource("23_spawn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 0.05, -36.0)
+team = 2
+
+[node name="Spawn_South_WestFlank" parent="Spawns" instance=ExtResource("23_spawn")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.5, 0.05, 36.0)
+team = 1
+
+[node name="Spawn_North_EastFlank" parent="Spawns" instance=ExtResource("23_spawn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.05, -36.0)
+team = 2
+
+[node name="Spawn_South_EastRail" parent="Spawns" instance=ExtResource("23_spawn")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16.5, 0.05, 36.0)
+team = 1
+
+[node name="Spawn_North_WestPergola" parent="Spawns" instance=ExtResource("23_spawn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 0.05, -36.0)
+team = 2
+
+[node name="Players" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."] 
 environment = SubResource("Environment_BGMI")

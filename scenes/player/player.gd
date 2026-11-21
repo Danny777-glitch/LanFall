@@ -114,6 +114,7 @@ var is_inspecting: bool = false
 var smoke_cooldown: float = 0.0
 var hud_cache: Node = null
 var _last_scope_state: bool = false
+var _last_aiming_state: bool = false
 var _last_smoke_ready: bool = true
 
 # -- Movement & Feel State --
@@ -131,6 +132,7 @@ var mouse_look_delta := Vector2.ZERO
 var max_health: int = 100
 var current_health: int = 100
 var is_dead: bool = false
+var is_invulnerable: bool = false
 var spawn_position := Vector3.ZERO
 
 # -- Network Sync Targets --
@@ -330,6 +332,12 @@ func _process(delta: float) -> void:
 		# Knife right click: heavy stab attack
 		if Input.is_action_just_pressed("aim") and fire_timer <= 0.0 and not is_switching and not is_dead:
 			_perform_knife_attack(true)
+
+	# Crosshair & Scope overlay update on ADS state change
+	if is_aiming != _last_aiming_state:
+		_last_aiming_state = is_aiming
+		if hud_cache and hud_cache.has_method("set_crosshair_visible"):
+			hud_cache.set_crosshair_visible(!is_aiming)
 
 	# Sniper Scope Overlay - state change only
 	if active_weapon_index == 2:
@@ -805,8 +813,14 @@ func rpc_apply_damage(amount: int, attacker_name: String, attacker_id: int) -> v
 	_apply_damage_internal(amount, attacker_name, attacker_id)
 
 
+func grant_spawn_protection(duration: float = 3.0) -> void:
+	is_invulnerable = true
+	var timer := get_tree().create_timer(duration)
+	timer.timeout.connect(func(): is_invulnerable = false)
+
+
 func _apply_damage_internal(amount: int, attacker_name: String, attacker_id: int) -> void:
-	if is_dead:
+	if is_dead or is_invulnerable:
 		return
 
 	current_health = clampi(current_health - amount, 0, max_health)

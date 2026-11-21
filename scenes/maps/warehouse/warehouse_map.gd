@@ -5,14 +5,16 @@ extends Node3D
 
 const PLAYER_SCENE = preload("res://scenes/player/player.tscn")
 
-const SPAWN_POINTS: Array[Vector3] = [
-	Vector3(0.0, 1.2, 42.0),     # Team 1 South Twin Sheds Center
-	Vector3(0.0, 1.2, -42.0),    # Team 2 North Twin Sheds Center
-	Vector3(-5.5, 1.2, 43.0),    # Team 1 South Left Shed
-	Vector3(5.5, 1.2, -43.0),    # Team 2 North Left Shed
-	Vector3(5.5, 1.2, 43.0),     # Team 1 South Right Shed
-	Vector3(-5.5, 1.2, -43.0),   # Team 2 North Right Shed
+const SPAWN_POINTS: Array[Dictionary] = [
+	{ "pos": Vector3(-4.0, 0.05, 36.0), "rot_y": deg_to_rad(180.0), "team": 1 },   # Team 1 South Mid-Left (Covered by Warehouse South Wall)
+	{ "pos": Vector3(4.0, 0.05, -36.0), "rot_y": 0.0, "team": 2 },                # Team 2 North Mid-Right (Covered by Warehouse North Wall)
+	{ "pos": Vector3(-6.5, 0.05, 36.0), "rot_y": deg_to_rad(180.0), "team": 1 },  # Team 1 South West Flank
+	{ "pos": Vector3(6.5, 0.05, -36.0), "rot_y": 0.0, "team": 2 },                # Team 2 North East Flank
+	{ "pos": Vector3(16.5, 0.05, 36.0), "rot_y": deg_to_rad(180.0), "team": 1 },  # Team 1 South East Rail Flank
+	{ "pos": Vector3(-16.5, 0.05, -36.0), "rot_y": 0.0, "team": 2 },              # Team 2 North West Pergola Flank
 ]
+
+const SPAWN_PROTECTION_DURATION := 3.0
 
 @onready var players_container: Node3D = $Players
 
@@ -61,10 +63,35 @@ func _spawn_player(peer_id: int) -> void:
 
 	# Assign spawn point based on peer index
 	var spawn_idx := (peer_id - 1) % SPAWN_POINTS.size()
-	player_inst.position = SPAWN_POINTS[spawn_idx]
+	var spawn_data: Dictionary = SPAWN_POINTS[spawn_idx]
+	player_inst.position = spawn_data["pos"]
+	player_inst.rotation.y = spawn_data["rot_y"]
 
 	players_container.add_child(player_inst)
-	print("[TestMap] Spawned player node for peer %d at %s" % [peer_id, player_inst.position])
+	print("[TestMap] Spawned player node for peer %d at %s facing %s" % [peer_id, player_inst.position, player_inst.rotation.y])
+
+	# Spawn protection: 3 seconds of invulnerability
+	if player_inst.has_method("grant_spawn_protection"):
+		player_inst.grant_spawn_protection(SPAWN_PROTECTION_DURATION)
+	else:
+		_apply_spawn_protection(player_inst)
+
+
+func _apply_spawn_protection(player: Node) -> void:
+	if player.has_method("set_invulnerable"):
+		player.set_invulnerable(true)
+	elif "invulnerable" in player:
+		player.invulnerable = true
+
+	var timer := get_tree().create_timer(SPAWN_PROTECTION_DURATION)
+	timer.timeout.connect(func():
+		if is_instance_valid(player):
+			if player.has_method("set_invulnerable"):
+				player.set_invulnerable(false)
+			elif "invulnerable" in player:
+				player.invulnerable = false
+			print("[TestMap] Spawn protection ended for %s" % player.name)
+	)
 
 
 func _on_network_player_connected(peer_id: int, _player_data: Dictionary) -> void:

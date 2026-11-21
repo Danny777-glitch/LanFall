@@ -126,6 +126,11 @@ func set_scope_overlay(is_scoped: bool) -> void:
 		crosshair.visible = not is_scoped
 
 
+func set_crosshair_visible(is_vis: bool) -> void:
+	if crosshair:
+		crosshair.visible = is_vis
+
+
 func set_smoke_blind(inside: bool) -> void:
 	if not smoke_blind:
 		return
